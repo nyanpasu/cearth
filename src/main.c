@@ -6,6 +6,7 @@
 
 #include "login.h"
 #include "config.h"
+#include "version.h"
 
 int window_height = 600;
 int window_width = 800;
@@ -37,9 +38,9 @@ void
 print_ver()
 {
         printf("Cearth: The open source Haven and Hearth client. Ver. %d.%d.%d\n",
-                        @CEARTH_VERSION_MAJOR@,
-                        @CEARTH_VERSION_MINOR@,
-                        @CEARTH_VERSION_PATCH@);
+                        VERSION_MAJOR,
+                        VERSION_MINOR,
+                        VERSION_PATCH);
 }
 
 void
