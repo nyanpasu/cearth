@@ -2,7 +2,6 @@
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_net.h>
-#include <openssl/ssl.h>
 
 #include "login.h"
 #include "config.h"
@@ -17,19 +16,13 @@ SDL_Window *g_window;
 void print_ver();
 void initialize_libs();
 
-int main(int argc, char **argv)
+int main(void)
 {
         print_ver();
         initialize_libs();
 
-        SSL_CTX *ctx = SSL_CTX_new(SSLv3_method());
-
-        if (ctx)
-        {
-                printf("werkd.\n");
-        }
-
-        SSL_CTX_free(ctx);
+        IPaddress ipaddress;
+        SDLNet_ResolveHost(&ipaddress, haven_authserv, 1871);
 
         return 0;
 }
@@ -48,7 +41,6 @@ initialize_libs()
 {
         char fail = 0;
 
-        SSL_library_init();
         fail += SDL_Init(SDL_INIT_EVERYTHING);
         fail += SDLNet_Init();
 
