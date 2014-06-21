@@ -10,18 +10,28 @@ CONFIGURE_FILE (
 # to find version.h
 include_directories("${PROJECT_BINARY_DIR}")
  
-ADD_EXECUTABLE(${PROJECT_NAME} main.c login.c)
+ADD_EXECUTABLE(${PROJECT_NAME}
+        main.c
+        utils.c
+        #login.c
+        )
  
 INCLUDE(FindPkgConfig)
 PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
-FIND_PACKAGE(SDL_image)
-FIND_PACKAGE(SDL_net)
+PKG_SEARCH_MODULE(SDL2_net REQUIRED SDL2_net)
+PKG_SEARCH_MODULE(SDL2_image REQUIRED SDL2_image)
+PKG_SEARCH_MODULE(LIBCURL REQUIRED libcurl)
+#FIND_PACKAGE(SDL_image)
+#FIND_PACKAGE(SDL_net)
 
 INCLUDE_DIRECTORIES(
         ${SDL2_INCLUDE_DIRS}
-        ${SDLIMAGE_INCLUDE_DIRS}
-        ${SDLNET_INCLUDE_DIRS})
+        ${SDL2_image_INCLUDE_DIRS}
+        ${SDL2_net_INCLUDE_DIRS}
+        )
 TARGET_LINK_LIBRARIES( ${PROJECT_NAME}
         ${SDL2_LIBRARIES}
-        ${SDL_IMAGE_LIBRARIES}
-        ${SDL_NET_LIBRARIES})
+        ${SDL2_image_LIBRARIES}
+        ${SDL2_net_LIBRARIES}
+        ${LIBCURL_LIBRARIES}
+        )

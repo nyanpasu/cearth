@@ -1,9 +1,12 @@
 #include <stdio.h>
+#include <regex.h>
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_net.h>
 
-#include "login.h"
+#include <curl/curl.h>
+
+#include "utils.h"
 #include "config.h"
 #include "version.h"
 
@@ -16,13 +19,24 @@ SDL_Window *g_window;
 void print_ver();
 void initialize_libs();
 
-int main(void)
+int main(int argc, const char **argv)
 {
-        print_ver();
+        /* TODO Use getopt to handle parsing. */
+        if (argc > 1) {
+                if (strcmp(argv[1],"--version") + strcmp(argv[1],"-v")== 0) {
+                        print_ver();
+                        return 0;
+                }
+        } else {
+                printf("Usage: %s <username>", argv[0]);
+                return 0;
+        }
+        if (util_home_init() == 0)
+                exit(EXIT_FAILURE);
         initialize_libs();
 
-        IPaddress ipaddress;
-        SDLNet_ResolveHost(&ipaddress, haven_authserv, 1871);
+        const char *username = argv[1];
+        loginhttp_gettoken(username);
 
         return 0;
 }
@@ -45,7 +59,9 @@ initialize_libs()
         fail += SDLNet_Init();
 
         if (fail) {
-                printf("Something could not initialize properly.\n");
-                exit(0);
+                fprintf(stderr, "An SDL library failed to initialize properly.\n");
+                exit(EXIT_FAILURE);
         }
+
+        curl_global_init(CURL_GLOBAL_ALL);
 }
