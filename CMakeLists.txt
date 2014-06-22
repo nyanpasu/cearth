@@ -1,8 +1,13 @@
-cmake_minimum_required (VERSION 2.8)
-project (cearth) 
+CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
+PROJECT (cearth) 
 
-set (CEARTH_VERSION_MAJOR 0)
-set (CEARTH_VERSION_MINOR 0)
-set (CEARTH_VERSION_PATCH 1)
+ADD_DEFINITIONS(
+        -std=c11
+        # Other flags
+        )
 
-add_subdirectory (src)
+SET (CEARTH_VERSION_MAJOR 0)
+SET (CEARTH_VERSION_MINOR 0)
+SET (CEARTH_VERSION_PATCH 1)
+
+ADD_SUBDIRECTORY (src)

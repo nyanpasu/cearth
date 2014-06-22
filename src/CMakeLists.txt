@@ -13,7 +13,7 @@ include_directories("${PROJECT_BINARY_DIR}")
 ADD_EXECUTABLE(${PROJECT_NAME}
         main.c
         utils.c
-        #login.c
+        login.c
         )
  
 INCLUDE(FindPkgConfig)

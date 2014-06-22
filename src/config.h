@@ -2,6 +2,7 @@
 #define _CONFIG_H_
 
 #define LOGINDB_FILE "logindb"
+#define LOGINDB_MAX 100
 #define LOGINDB_MAXLINE 128
 
 static const char *haven_authserv    = "moltke.seatribe.se";

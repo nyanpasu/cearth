@@ -8,6 +8,7 @@
 
 #include "utils.h"
 #include "config.h"
+#include "login.h"
 #include "version.h"
 
 int window_height = 600;
@@ -28,15 +29,19 @@ int main(int argc, const char **argv)
                         return 0;
                 }
         } else {
-                printf("Usage: %s <username>", argv[0]);
+                printf("Usage: %s <username>\n", argv[0]);
                 return 0;
         }
+        const char *arg_user = argv[1];
         if (util_home_init() == 0)
                 exit(EXIT_FAILURE);
         initialize_libs();
 
-        const char *username = argv[1];
-        loginhttp_gettoken(username);
+        /* TEST: Logging into havenandhearth.com */
+        struct cearth_logindb db;
+        logindb_open(&db);
+        loginhttp_getcookie(arg_user);
+        logindb_close(&db);
 
         return 0;
 }
