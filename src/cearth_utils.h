@@ -8,6 +8,10 @@
 #include <stdlib.h>
 #include <stdio.h>
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_net.h>
+#include <curl/curl.h>
+
 #include "cearth_config.h"
 
 /* Checks if cearth_config_dir exists
