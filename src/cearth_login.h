@@ -20,9 +20,9 @@ typedef struct
 } cearth_logindb;
 
 /* Logs into havenandhearth.com and gets a session cookie */
-void loginhttp_getcookie(const char *user);
+void loginhttp_cookieget(const char *user);
 /* gets /autohaven and gets a token in hexadecimal */
-void loginhttp_gettoken(const char *user, const char *cookie);
+void loginhttp_tokenget(const char *user, const char *cookie);
 
 int logindb_useradd(cearth_logindb *, char *user);
 int logindb_userdel(cearth_logindb *, char *user);
@@ -36,6 +36,12 @@ int logindb_usercheck(cearth_logindb *, char *user);
 int logindb_cookieget(cearth_logindb *, char *user);
 int logindb_cookieset(cearth_logindb *, char *user, char *cookie);
 int logindb_cookiedel(cearth_logindb *, char *user);
+/*
+ * Requires user to have an assigned cookie or it will return NULL.
+ * Retrieves hexadecimal cookie using logindb_tokenget
+ * and returns a pointer to it.
+ */
+char * logindb_tokenget(cearth_logindb *, char *user);
 
 /*
  * Opens LOGINDB_FILE and loads it into the appropriate struct.
