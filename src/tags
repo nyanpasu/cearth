@@ -4,44 +4,48 @@
 !_TAG_PROGRAM_NAME	Exuberant Ctags	//
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.8	//
-CMD_GETTOKEN	cearth_defines.h	7;"	d	language:C++
-CMD_PASSWD	cearth_defines.h	6;"	d	language:C++
-CMD_USETOKEN	cearth_defines.h	8;"	d	language:C++
-CMD_USR	cearth_defines.h	5;"	d	language:C++
-LOGINDB_FILE	cearth_config.h	4;"	d	language:C++
-LOGINDB_MAX	cearth_config.h	5;"	d	language:C++
-LOGINDB_MAXLINE	cearth_config.h	6;"	d	language:C++
-_CONFIG_H_	cearth_config.h	2;"	d	language:C++
-_DEFINES_H	cearth_defines.h	10;"	d	language:C++
-_LOGIN_H	cearth_login.h	2;"	d	language:C++
-_NETWORK_H	cearth_network.h	18;"	d	language:C++
-_UTILS_H_	cearth_utils.h	2;"	d	language:C++
-blob	cearth_network.h	/^struct blob {$/;"	s	language:C++
-blob_add_int8	cearth_network.c	/^blob_add_int8(blob *b, int8_t i)$/;"	f	language:C
-blob_add_str	cearth_network.c	/^blob_add_str(blob *b, char *str)$/;"	f	language:C
-blob_init	cearth_network.c	/^blob_init(blob *b)$/;"	f	language:C
-cearth_config_dir	cearth_config.h	/^static const char *cearth_config_dir = "\/.cearth\/";$/;"	v	language:C++
-cearth_logindb	cearth_login.h	/^} cearth_logindb;$/;"	t	language:C++	typeref:struct:__anon1
-cookie	cearth_login.h	/^        char *cookie[LOGINDB_MAX];$/;"	m	language:C++	struct:__anon1
-data	cearth_network.h	/^        unsigned char data[65535]; \/\/ TODO put data on the heap$/;"	m	language:C++	struct:blob
-foo	cearth_config.h	/^static const char *foo               = "test";$/;"	v	language:C++
+CMD_GETTOKEN	config/cearth_defines.h	7;"	d	language:C
+CMD_PASSWD	config/cearth_defines.h	6;"	d	language:C
+CMD_USETOKEN	config/cearth_defines.h	8;"	d	language:C
+CMD_USR	config/cearth_defines.h	5;"	d	language:C
+LOGINDB_FILE	utils/cearth_config.h	4;"	d	language:C
+LOGINDB_MAX	utils/cearth_config.h	5;"	d	language:C
+LOGINDB_MAXLINE	utils/cearth_config.h	6;"	d	language:C
+VERSION_MAJOR	cearth_version.h.in	4;"	d	language:C	file:
+VERSION_MINOR	cearth_version.h.in	5;"	d	language:C	file:
+VERSION_PATCH	cearth_version.h.in	6;"	d	language:C	file:
+_CONFIG_H_	utils/cearth_config.h	2;"	d	language:C
+_DEFINES_H	config/cearth_defines.h	10;"	d	language:C
+_LOGIN_H	net/cearth_login.h	2;"	d	language:C
+_NETWORK_H	net/cearth_network.h	18;"	d	language:C
+_UTILS_H_	utils/cearth_utils.h	2;"	d	language:C
+_VERSION_H	cearth_version.h.in	2;"	d	language:C	file:
+blob	net/cearth_network.h	/^struct blob {$/;"	s	language:C
+blob_add_int8	net/cearth_network.c	/^blob_add_int8(blob *b, int8_t i)$/;"	f	language:C
+blob_add_str	net/cearth_network.c	/^blob_add_str(blob *b, char *str)$/;"	f	language:C
+blob_init	net/cearth_network.c	/^blob_init(blob *b)$/;"	f	language:C
+cearth_config_dir	utils/cearth_config.h	/^static const char *cearth_config_dir = "\/.cearth\/";$/;"	v	language:C
+cearth_logindb	net/cearth_login.h	/^} cearth_logindb;$/;"	t	language:C	typeref:struct:__anon1
+cookie	net/cearth_login.h	/^        char *cookie[LOGINDB_MAX];$/;"	m	language:C	struct:__anon1
+data	net/cearth_network.h	/^        unsigned char data[65535]; \/\/ TODO put data on the heap$/;"	m	language:C	struct:blob
+foo	utils/cearth_config.h	/^static const char *foo               = "test";$/;"	v	language:C
 g_renderer	cearth_main.c	/^SDL_Renderer *g_renderer;$/;"	v	language:C
 g_window	cearth_main.c	/^SDL_Window *g_window;$/;"	v	language:C
-haven_authserv	cearth_config.h	/^static const char *haven_authserv    = "moltke.seatribe.se";$/;"	v	language:C++
-haven_webauth	cearth_config.h	/^static const char *haven_webauth     = "www.havenandhearth.com";$/;"	v	language:C++
-logindb_close	cearth_login.c	/^logindb_close(struct cearth_logindb *db)$/;"	f	language:C
-logindb_open	cearth_login.c	/^logindb_open(struct cearth_logindb *db)$/;"	f	language:C
-logindb_useradd	cearth_login.c	/^logindb_useradd(struct cearth_logindb *db, char *user)$/;"	f	language:C
-logindb_usercheck	cearth_login.c	/^logindb_usercheck(struct cearth_logindb *db, char *user)$/;"	f	language:C
-loginhttp_getcookie	cearth_login.c	/^loginhttp_getcookie(const char *user)$/;"	f	language:C
-loginhttp_gettoken	cearth_login.c	/^loginhttp_gettoken(const char *user, const char *cookie)$/;"	f	language:C
+haven_authserv	utils/cearth_config.h	/^static const char *haven_authserv    = "moltke.seatribe.se";$/;"	v	language:C
+haven_webauth	utils/cearth_config.h	/^static const char *haven_webauth     = "www.havenandhearth.com";$/;"	v	language:C
+logindb_close	net/cearth_login.c	/^logindb_close(struct cearth_logindb *db)$/;"	f	language:C
+logindb_open	net/cearth_login.c	/^logindb_open(struct cearth_logindb *db)$/;"	f	language:C
+logindb_useradd	net/cearth_login.c	/^logindb_useradd(struct cearth_logindb *db, char *user)$/;"	f	language:C
+logindb_usercheck	net/cearth_login.c	/^logindb_usercheck(struct cearth_logindb *db, char *user)$/;"	f	language:C
+loginhttp_getcookie	net/cearth_login.c	/^loginhttp_getcookie(const char *user)$/;"	f	language:C
+loginhttp_gettoken	net/cearth_login.c	/^loginhttp_gettoken(const char *user, const char *cookie)$/;"	f	language:C
 main	cearth_main.c	/^int main(int argc, const char **argv)$/;"	f	language:C
-n	cearth_login.h	/^        int n;$/;"	m	language:C++	struct:__anon1
-name	cearth_login.h	/^        char *name[LOGINDB_MAX];$/;"	m	language:C++	struct:__anon1
-size	cearth_network.h	/^        int size;$/;"	m	language:C++	struct:blob
-token	cearth_login.h	/^        char *token[LOGINDB_MAX];$/;"	m	language:C++	struct:__anon1
-utils_home_init	cearth_utils.c	/^utils_home_init()$/;"	f	language:C
-utils_lib_init	cearth_utils.c	/^utils_lib_init()$/;"	f	language:C
-utils_print_ver	cearth_utils.c	/^utils_print_ver()$/;"	f	language:C
+n	net/cearth_login.h	/^        int n;$/;"	m	language:C	struct:__anon1
+name	net/cearth_login.h	/^        char *name[LOGINDB_MAX];$/;"	m	language:C	struct:__anon1
+size	net/cearth_network.h	/^        int size;$/;"	m	language:C	struct:blob
+token	net/cearth_login.h	/^        char *token[LOGINDB_MAX];$/;"	m	language:C	struct:__anon1
+utils_home_init	utils/cearth_utils.c	/^utils_home_init()$/;"	f	language:C
+utils_lib_init	utils/cearth_utils.c	/^utils_lib_init()$/;"	f	language:C
+utils_print_ver	utils/cearth_utils.c	/^utils_print_ver()$/;"	f	language:C
 window_height	cearth_main.c	/^int window_height = 600;$/;"	v	language:C
 window_width	cearth_main.c	/^int window_width = 800;$/;"	v	language:C
