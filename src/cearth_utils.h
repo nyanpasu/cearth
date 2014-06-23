@@ -14,6 +14,8 @@
  * Makes it if doesn't
  * Changes active dir to the cearth_config_dir
  * return 1 on success, 0 on failure. */
-int util_home_init();
+int utils_home_init();
+void utils_lib_init();
+void utils_lib_deinit();
 
 #endif
