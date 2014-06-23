@@ -1,0 +1,47 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CMD_GETTOKEN	cearth_defines.h	7;"	d	language:C++
+CMD_PASSWD	cearth_defines.h	6;"	d	language:C++
+CMD_USETOKEN	cearth_defines.h	8;"	d	language:C++
+CMD_USR	cearth_defines.h	5;"	d	language:C++
+LOGINDB_FILE	cearth_config.h	4;"	d	language:C++
+LOGINDB_MAX	cearth_config.h	5;"	d	language:C++
+LOGINDB_MAXLINE	cearth_config.h	6;"	d	language:C++
+_CONFIG_H_	cearth_config.h	2;"	d	language:C++
+_DEFINES_H	cearth_defines.h	10;"	d	language:C++
+_LOGIN_H	cearth_login.h	2;"	d	language:C++
+_NETWORK_H	cearth_network.h	18;"	d	language:C++
+_UTILS_H_	cearth_utils.h	2;"	d	language:C++
+blob	cearth_network.h	/^struct blob {$/;"	s	language:C++
+blob_add_int8	cearth_network.c	/^blob_add_int8(blob *b, int8_t i)$/;"	f	language:C
+blob_add_str	cearth_network.c	/^blob_add_str(blob *b, char *str)$/;"	f	language:C
+blob_init	cearth_network.c	/^blob_init(blob *b)$/;"	f	language:C
+cearth_config_dir	cearth_config.h	/^static const char *cearth_config_dir = "\/.cearth\/";$/;"	v	language:C++
+cearth_logindb	cearth_login.h	/^} cearth_logindb;$/;"	t	language:C++	typeref:struct:__anon1
+cookie	cearth_login.h	/^        char *cookie[LOGINDB_MAX];$/;"	m	language:C++	struct:__anon1
+data	cearth_network.h	/^        unsigned char data[65535]; \/\/ TODO put data on the heap$/;"	m	language:C++	struct:blob
+foo	cearth_config.h	/^static const char *foo               = "test";$/;"	v	language:C++
+g_renderer	cearth_main.c	/^SDL_Renderer *g_renderer;$/;"	v	language:C
+g_window	cearth_main.c	/^SDL_Window *g_window;$/;"	v	language:C
+haven_authserv	cearth_config.h	/^static const char *haven_authserv    = "moltke.seatribe.se";$/;"	v	language:C++
+haven_webauth	cearth_config.h	/^static const char *haven_webauth     = "www.havenandhearth.com";$/;"	v	language:C++
+initialize_libs	cearth_main.c	/^initialize_libs()$/;"	f	language:C
+logindb_close	cearth_login.c	/^logindb_close(struct cearth_logindb *db)$/;"	f	language:C
+logindb_open	cearth_login.c	/^logindb_open(struct cearth_logindb *db)$/;"	f	language:C
+logindb_useradd	cearth_login.c	/^logindb_useradd(struct cearth_logindb *db, char *user)$/;"	f	language:C
+logindb_usercheck	cearth_login.c	/^logindb_usercheck(struct cearth_logindb *db, char *user)$/;"	f	language:C
+loginhttp_getcookie	cearth_login.c	/^loginhttp_getcookie(const char *user)$/;"	f	language:C
+loginhttp_gettoken	cearth_login.c	/^loginhttp_gettoken(const char *user, const char *cookie)$/;"	f	language:C
+main	cearth_main.c	/^int main(int argc, const char **argv)$/;"	f	language:C
+n	cearth_login.h	/^        int n;$/;"	m	language:C++	struct:__anon1
+name	cearth_login.h	/^        char *name[LOGINDB_MAX];$/;"	m	language:C++	struct:__anon1
+print_ver	cearth_main.c	/^print_ver()$/;"	f	language:C
+size	cearth_network.h	/^        int size;$/;"	m	language:C++	struct:blob
+token	cearth_login.h	/^        char *token[LOGINDB_MAX];$/;"	m	language:C++	struct:__anon1
+util_home_init	cearth_utils.c	/^util_home_init()$/;"	f	language:C
+window_height	cearth_main.c	/^int window_height = 600;$/;"	v	language:C
+window_width	cearth_main.c	/^int window_width = 800;$/;"	v	language:C
