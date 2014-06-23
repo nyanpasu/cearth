@@ -13,6 +13,7 @@
 #include <curl/curl.h>
 
 #include "../config/cearth_config.h"
+#include "cearth_version.h"
 
 /* Checks if cearth_config_dir exists
  * Makes it if doesn't

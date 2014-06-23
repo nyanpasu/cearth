@@ -43,3 +43,11 @@ utils_lib_init()
 
         curl_global_init(CURL_GLOBAL_ALL);
 }
+
+/* TODO */
+void
+utils_lib_deinit()
+{
+        printf("utils_lib_init is unimplemented\n");
+}
+
