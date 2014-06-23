@@ -17,15 +17,12 @@ int window_width = 800;
 SDL_Renderer *g_renderer;
 SDL_Window *g_window;
 
-void print_ver();
-void initialize_libs();
-
 int main(int argc, const char **argv)
 {
         /* TODO Use getopt to handle parsing. */
         if (argc > 1) {
                 if (strcmp(argv[1],"--version") + strcmp(argv[1],"-v")== 0) {
-                        print_ver();
+                        utils_print_ver();
                         return 0;
                 }
         } else {
@@ -37,44 +34,51 @@ int main(int argc, const char **argv)
 
         /* NOTE: Lines that are commented out are prototypes */
         /* Initialize libraries and set working dir to ~/.cearth */
-        if (util_home_init() == 0)
+        if (utils_home_init() == 0)
                 exit(EXIT_FAILURE);
-        initialize_libs();
+
+        utils_lib_init();
         /* Load resources */
+        cearth_resourcedb *resdb;
+        resdb = resourcedb_open();
         /* Login into website and obtain token. */
-        cearth_logindb *db;
-        db = logindb_open();
-        logindb_close(db);
+        cearth_logindb *logdb;
+        char *cookie, *token;
+        logdb = logindb_open();
+        int check = logindb_usercheck(logdb, arg_user);
+        switch(check) {
+                case 0:
+                        logindb_useradd(logdb, arg_user);
+                        break;
+                case 1:
+                        loginhttp_cookieget(logdb, arg_user);
+                case 2:
+                        token = logindb_tokenget(logdb, arg_user);
+                        break;
+                default:
+                        break;
+        }
+        logindb_close(logindb);
         /* Attempt login into game servers */
+        cearth_ctx *ctx;
+        ctx = cearthctx_new();
+        cearthctx_connect(ctx, token);
         /* Set up screen and gui elements */
+        cearth_screen *scr cearthscreen_new();
+        cearth_gui *gui = cearthgui_new();
+        cearthgui_bind(gui, ctx);
+        cearthscreen_bindsdl(scr, g_renderer);
+        cearthscreen_bindgui(scr, gui);
+        cearthscreen_start(scr);
         /* Character selection */
         /* Game loop */
         /* Disconnect, free memory and shutdown gracefully. */
+        cearthctx_disconnect(ctx);
+        cearthgui_free(gui);
+        cearthscreen_stop(scr);
+        cearthscreen_free(scr);
+
+        utils_lib_deinit();
 
         return 0;
-}
-
-void
-print_ver()
-{
-        printf("Cearth: The open source Haven and Hearth client. Ver. %d.%d.%d\n",
-                        VERSION_MAJOR,
-                        VERSION_MINOR,
-                        VERSION_PATCH);
-}
-
-void
-initialize_libs()
-{
-        char fail = 0;
-
-        fail += SDL_Init(SDL_INIT_EVERYTHING);
-        fail += SDLNet_Init();
-
-        if (fail) {
-                fprintf(stderr, "An SDL library failed to initialize properly.\n");
-                exit(EXIT_FAILURE);
-        }
-
-        curl_global_init(CURL_GLOBAL_ALL);
 }
