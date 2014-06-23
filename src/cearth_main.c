@@ -9,7 +9,6 @@
 #include "config/cearth_config.h"
 #include "utils/cearth_utils.h"
 #include "net/cearth_login.h"
-#include "cearth_version.h"
 
 int window_height = 600;
 int window_width = 800;
@@ -52,12 +51,15 @@ int main(int argc, const char **argv)
                         break;
                 case 1:
                         loginhttp_cookieget(logdb, arg_user);
+                        cookie = logindb_cookieget(logdb, arg_user);
                 case 2:
-                        token = logindb_tokenget(logdb, arg_user);
+                        token  = logindb_tokenget(logdb, arg_user, cookie);
                         break;
                 default:
                         break;
         }
+        /* TEST */
+        printf("Token: %s", token);
         logindb_close(logdb);
         //////////////////////  
         //  UNIMPLEMENTED
