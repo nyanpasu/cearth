@@ -12,7 +12,7 @@ Requirements
 * SDL2
 * libcurl
 
-BUILDING
+Building
 ========
 Run:
 ```
