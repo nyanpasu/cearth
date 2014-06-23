@@ -20,7 +20,7 @@ utils_home_init()
 }
 
 void
-utils_print_ver()
+utils_ver_print()
 {
         printf("Cearth: The open source Haven and Hearth client. Ver. %d.%d.%d\n",
                         VERSION_MAJOR,

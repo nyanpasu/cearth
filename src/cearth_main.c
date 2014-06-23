@@ -6,9 +6,9 @@
 
 #include <curl/curl.h>
 
-#include "cearth_utils.h"
-#include "cearth_config.h"
-#include "cearth_login.h"
+#include "config/cearth_config.h"
+#include "utils/cearth_utils.h"
+#include "net/cearth_login.h"
 #include "cearth_version.h"
 
 int window_height = 600;
@@ -22,7 +22,7 @@ int main(int argc, const char **argv)
         /* TODO Use getopt to handle parsing. */
         if (argc > 1) {
                 if (strcmp(argv[1],"--version") + strcmp(argv[1],"-v")== 0) {
-                        utils_print_ver();
+                        utils_ver_print();
                         return 0;
                 }
         } else {
