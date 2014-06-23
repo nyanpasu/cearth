@@ -42,10 +42,9 @@ int main(int argc, const char **argv)
         initialize_libs();
         /* Load resources */
         /* Login into website and obtain token. */
-        struct cearth_logindb db;
-        logindb_open(&db);
-        loginhttp_getcookie(arg_user);
-        logindb_close(&db);
+        cearth_logindb *db;
+        db = logindb_open();
+        logindb_close(db);
         /* Attempt login into game servers */
         /* Set up screen and gui elements */
         /* Character selection */
