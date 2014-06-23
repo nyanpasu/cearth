@@ -38,9 +38,9 @@ int main(int argc, const char **argv)
                 exit(EXIT_FAILURE);
 
         utils_lib_init();
-        /* Load resources */
-        cearth_resourcedb *resdb;
-        resdb = resourcedb_open();
+        // /* Load resources */
+        // cearth_resourcedb *resdb;
+        // resdb = resourcedb_open();
         /* Login into website and obtain token. */
         cearth_logindb *logdb;
         char *cookie, *token;
@@ -58,25 +58,28 @@ int main(int argc, const char **argv)
                 default:
                         break;
         }
-        logindb_close(logindb);
-        /* Attempt login into game servers */
-        cearth_ctx *ctx;
-        ctx = cearthctx_new();
-        cearthctx_connect(ctx, token);
-        /* Set up screen and gui elements */
-        cearth_screen *scr cearthscreen_new();
-        cearth_gui *gui = cearthgui_new();
-        cearthgui_bind(gui, ctx);
-        cearthscreen_bindsdl(scr, g_renderer);
-        cearthscreen_bindgui(scr, gui);
-        cearthscreen_start(scr);
-        /* Character selection */
-        /* Game loop */
-        /* Disconnect, free memory and shutdown gracefully. */
-        cearthctx_disconnect(ctx);
-        cearthgui_free(gui);
-        cearthscreen_stop(scr);
-        cearthscreen_free(scr);
+        logindb_close(logdb);
+        //////////////////////  
+        //  UNIMPLEMENTED
+        ////////////////////// 
+        //  /* Attempt login into game servers */
+        //  cearth_ctx *ctx;
+        //  ctx = cearthctx_new();
+        //  cearthctx_connect(ctx, token);
+        //  /* Set up screen and gui elements */
+        //  cearth_screen *scr cearthscreen_new();
+        //  cearth_gui *gui = cearthgui_new();
+        //  cearthgui_bind(gui, ctx);
+        //  cearthscreen_bindsdl(scr, g_renderer);
+        //  cearthscreen_bindgui(scr, gui);
+        //  cearthscreen_start(scr);
+        //  /* Character selection */
+        //  /* Game loop */
+        //  /* Disconnect, free memory and shutdown gracefully. */
+        //  cearthctx_disconnect(ctx);
+        //  cearthgui_free(gui);
+        //  cearthscreen_stop(scr);
+        //  cearthscreen_free(scr);
 
         utils_lib_deinit();
 
