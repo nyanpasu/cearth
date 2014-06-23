@@ -32,16 +32,25 @@ int main(int argc, const char **argv)
                 printf("Usage: %s <username>\n", argv[0]);
                 return 0;
         }
+
         const char *arg_user = argv[1];
+
+        /* NOTE: Lines that are commented out are prototypes */
+        /* Initialize libraries and set working dir to ~/.cearth */
         if (util_home_init() == 0)
                 exit(EXIT_FAILURE);
         initialize_libs();
-
-        /* TEST: Logging into havenandhearth.com */
+        /* Load resources */
+        /* Login into website and obtain token. */
         struct cearth_logindb db;
         logindb_open(&db);
         loginhttp_getcookie(arg_user);
         logindb_close(&db);
+        /* Attempt login into game servers */
+        /* Set up screen and gui elements */
+        /* Character selection */
+        /* Game loop */
+        /* Disconnect, free memory and shutdown gracefully. */
 
         return 0;
 }
