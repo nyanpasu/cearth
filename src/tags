@@ -29,7 +29,6 @@ g_renderer	cearth_main.c	/^SDL_Renderer *g_renderer;$/;"	v	language:C
 g_window	cearth_main.c	/^SDL_Window *g_window;$/;"	v	language:C
 haven_authserv	cearth_config.h	/^static const char *haven_authserv    = "moltke.seatribe.se";$/;"	v	language:C++
 haven_webauth	cearth_config.h	/^static const char *haven_webauth     = "www.havenandhearth.com";$/;"	v	language:C++
-initialize_libs	cearth_main.c	/^initialize_libs()$/;"	f	language:C
 logindb_close	cearth_login.c	/^logindb_close(struct cearth_logindb *db)$/;"	f	language:C
 logindb_open	cearth_login.c	/^logindb_open(struct cearth_logindb *db)$/;"	f	language:C
 logindb_useradd	cearth_login.c	/^logindb_useradd(struct cearth_logindb *db, char *user)$/;"	f	language:C
@@ -39,9 +38,10 @@ loginhttp_gettoken	cearth_login.c	/^loginhttp_gettoken(const char *user, const c
 main	cearth_main.c	/^int main(int argc, const char **argv)$/;"	f	language:C
 n	cearth_login.h	/^        int n;$/;"	m	language:C++	struct:__anon1
 name	cearth_login.h	/^        char *name[LOGINDB_MAX];$/;"	m	language:C++	struct:__anon1
-print_ver	cearth_main.c	/^print_ver()$/;"	f	language:C
 size	cearth_network.h	/^        int size;$/;"	m	language:C++	struct:blob
 token	cearth_login.h	/^        char *token[LOGINDB_MAX];$/;"	m	language:C++	struct:__anon1
-util_home_init	cearth_utils.c	/^util_home_init()$/;"	f	language:C
+utils_home_init	cearth_utils.c	/^utils_home_init()$/;"	f	language:C
+utils_lib_init	cearth_utils.c	/^utils_lib_init()$/;"	f	language:C
+utils_print_ver	cearth_utils.c	/^utils_print_ver()$/;"	f	language:C
 window_height	cearth_main.c	/^int window_height = 600;$/;"	v	language:C
 window_width	cearth_main.c	/^int window_width = 800;$/;"	v	language:C
