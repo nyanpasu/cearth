@@ -1,4 +1,4 @@
-#include "network.h"
+#include "cearth_network.h"
 
 void
 blob_init(blob *b)

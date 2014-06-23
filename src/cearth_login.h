@@ -7,9 +7,9 @@
 #include <SDL2/SDL_net.h>
 #include <curl/curl.h>
 
-#include "defines.h"
-#include "network.h"
-#include "config.h"
+#include "cearth_defines.h"
+#include "cearth_network.h"
+#include "cearth_config.h"
 
 struct cearth_logindb
 {

@@ -6,10 +6,10 @@
 
 #include <curl/curl.h>
 
-#include "utils.h"
-#include "config.h"
-#include "login.h"
-#include "version.h"
+#include "cearth_utils.h"
+#include "cearth_config.h"
+#include "cearth_login.h"
+#include "cearth_version.h"
 
 int window_height = 600;
 int window_width = 800;

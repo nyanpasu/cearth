@@ -3,17 +3,17 @@ CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
 PROJECT(cearth)
 
 CONFIGURE_FILE (
-          "version.h.in"
-          "version.h"
+          "cearth_version.h.in"
+          "cearth_version.h"
           )
 # Add the binary tree to the search path for include files
 # to find version.h
 include_directories("${PROJECT_BINARY_DIR}")
  
 ADD_EXECUTABLE(${PROJECT_NAME}
-        main.c
-        utils.c
-        login.c
+        cearth_main.c
+        cearth_utils.c
+        cearth_login.c
         )
  
 INCLUDE(FindPkgConfig)

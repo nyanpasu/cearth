@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-#include "config.h"
+#include "cearth_config.h"
 
 /* Checks if cearth_config_dir exists
  * Makes it if doesn't
