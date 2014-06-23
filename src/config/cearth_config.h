@@ -4,6 +4,8 @@
 #define LOGINDB_FILE "logindb"
 #define LOGINDB_MAX 100
 #define LOGINDB_MAXLINE 128
+#define LOGIN_COOKIEJAR "cookie"
+#define LOGIN_COOKIESIZE 32
 
 static const char *haven_authserv    = "moltke.seatribe.se";
 static const char *haven_webauth     = "www.havenandhearth.com";
