@@ -28,7 +28,8 @@ typedef struct
 void loginhttp_cookieget(cearth_logindb *, const char *user);
 /* gets /autohaven and gets a token in hexadecimal
  * Requires a hsess cookie to be sent
- * Needs to parse a full jnlp file.
+ * Parses a fill retrived from the servers.
+ * The returned string is allocated on the heap.
  */
 char * loginhttp_tokenget(const char *);
 
