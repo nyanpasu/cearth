@@ -24,7 +24,10 @@ typedef struct
         cearth_loginuser user[LOGINDB_MAX];
 } cearth_logindb;
 
-/* Logs into havenandhearth.com and gets a session cookie */
+/* Logs into havenandhearth.com and gets a session cookie
+ * Prompts stdin for a password.
+ * Will store the cookie for the user into the logindb.
+ */
 void loginhttp_cookieget(cearth_logindb *, const char *user);
 /* gets /autohaven and gets a token in hexadecimal
  * Requires a hsess cookie to be sent
