@@ -58,12 +58,13 @@ logindb_close(cearth_logindb *db)
                 fputs(db->user[i].name, fp);
                 fputc(';', fp);
                 fputs(db->user[i].cookie, fp);
+
 				fputs(';', fp);
 				fputs(db->user[i]token, fp);
                 fputc('\n', fp);
 
                 free(db->user[i].name);
-                free(db->user[i].cookie]);
+                free(db->user[i].cookie);
 				free(db->user[i].token);
         }
 
@@ -75,12 +76,14 @@ logindb_useradd(cearth_logindb *db, const char *user)
 {
         char *newname   = calloc(strlen(user)+1, 1);
         char *newcookie = calloc(LOGIN_COOKIESIZE, 1);
+        char *newtoken  = calloc(LOGIN_TOKENSIZE , 1)
 
         strcpy(newname, user);
 
         db->n++;
-        db->name[db->n-1] = newname;
-        db->cookie[db->n-1] = newcookie;
+        db->user[db->n-1].name   = newname;
+        db->user[db->n-1].cookie = newcookie;
+        db->user[db->n-1].token  = newtoken;
 
         return 0;
 }
@@ -93,10 +96,10 @@ logindb_usercheck(cearth_logindb *db, const char *user)
 
         for (int i = 0; i < db->n; ++i)
         {
-                if (strcmp(db->name[i], user) == 0)
+                if (strcmp(db->name[i].name, user) == 0)
                 {
                         int success = 1;
-                        if (strlen(db->cookie[i]) > 0)
+                        if (strlen(db->name[i].cookie) > 0)
                                 success = 2;
                         return success;
                 }
@@ -113,7 +116,7 @@ logindb_userget(cearth_logindb *db, const char *user)
 
         for (int i = 0; i < db->n; ++i)
         {
-                if (strcmp(db->name[i], user) == 0)
+                if (strcmp(db->user[i].name, user) == 0)
                 {
                         return i;
                 }
@@ -126,7 +129,7 @@ char *
 logindb_cookieget(cearth_logindb *db, const char *user)
 {
         int n = logindb_userget(db, user);
-        return db->cookie[n];
+        return db->user.cookie[n];
 }
 
 char *
