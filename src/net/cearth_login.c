@@ -13,8 +13,8 @@ logindb_open(void)
         fgets(line, LOGINDB_MAXLINE, fp);
 
         while (!feof(fp)) {
-               if (strlen(line) > 0) {
-                       if(line[0] == '#') { // Simple comments.
+               if (strlen(line) > 0) { /* If line is not blank */
+                       if(line[0] == '#') { /* Ignore lines that start with # as comments. */
                                fgets(line, LOGINDB_MAXLINE, fp);
                                continue;
                        }
