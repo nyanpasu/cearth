@@ -50,12 +50,14 @@ int main(int argc, const char **argv)
                 case 0:
                         logindb_useradd(logdb, arg_user);
                         break;
-                case 1:
-                        loginhttp_cookieget(logdb, arg_user);
-                        cookie = logindb_cookieget(logdb, arg_user);
-                case 2:
-                        token  = logindb_tokenget(logdb, arg_user, cookie);
-                        break;
+      /*|*/     case 1:
+      /*|*/             loginhttp_cookieget(logdb, arg_user);
+      /*|*/     case 2:
+      /*|*/             cookie = logindb_cookieget(logdb, arg_user);
+      /*|*/             loginhttp_tokenget(logdb, cookie);
+      /*|*/     case 3:
+      /*|*/             token  = logindb_tokenget(logdb, arg_user, cookie);
+      /*V*/             break;
                 default:
                         break;
         }
