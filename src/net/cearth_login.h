@@ -34,7 +34,7 @@ void loginhttp_cookieget(cearth_logindb *, const char *user);
  * Parses a fill retrived from the servers.
  * The returned string is allocated on the heap.
  */
-char * loginhttp_tokenget(const char *);
+void loginhttp_tokenget(cearth_logindb *, const char *);
 
 /* Create new entry in the logindb */
 int logindb_useradd(cearth_logindb *, const char *user);

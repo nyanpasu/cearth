@@ -127,18 +127,21 @@ logindb_cookieget(cearth_logindb *db, const char *user)
         return db->user.cookie[n];
 }
 
-char *
-loginhttp_tokenget(const char *arg_cookie)
+void
+loginhttp_tokenget(cearth_logindb *db, const char *user)
 {
         char url[LOGIN_URLMAXSIZE] = {0};
         char cookie[LOGIN_MAXLINE] = {0};
         FILE *buf = tmpfile();
 
+        int n = logindb_userget(db, user);
+        char * user_cookie = db->user[b].cookie;
+
         strcat(url, haven_webauth);
         strcat(url, haven_tokenlink);
 
         strcat(cookie, "hsess=");
-        strcat(cookie, arg_cookie);
+        strcat(cookie, user_cookie);
         
         CURL *c = curl_easy_init();
         curl_easy_setopt(c, CURLOPT_URL, url);
@@ -151,7 +154,7 @@ loginhttp_tokenget(const char *arg_cookie)
 
         /* Parse tmp file */
         fseek(buf, 0, SEEK_SET);
-        char *tok = calloc(LOGIN_TOKENSIZE + 1, 1);
+        char *tok[LOGIN_TOKENSIZE] = {0};
         while(!feof(buf)) {
                 /* Finding the token string */
                 fscanf(buf, LOGIN_TOKSTRSTART"%s", tok);
@@ -160,7 +163,7 @@ loginhttp_tokenget(const char *arg_cookie)
         printf("TEST: Token from http: %s\n", tok);
 
         fclose(buf);
-        return tok;
+        strcpy(db->user[n].token, tok);
 }
 
 /* TODO store tokens in logindb as well. */
