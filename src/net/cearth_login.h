@@ -32,6 +32,7 @@ void loginhttp_cookieget(cearth_logindb *, const char *user);
  */
 char * loginhttp_tokenget(const char *);
 
+/* Create new entry in the logindb */
 int logindb_useradd(cearth_logindb *, const char *user);
 int logindb_userdel(cearth_logindb *, const char *user);
 /*
