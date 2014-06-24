@@ -70,8 +70,8 @@ int
 logindb_useradd(cearth_logindb *db, const char *user)
 {
         char *newname   = calloc(strlen(user)+1, 1);
-        char *newcookie = calloc(LOGIN_COOKIESIZE, 1);
-        char *newtoken  = calloc(LOGIN_TOKENSIZE , 1);
+        char *newcookie = calloc(LOGIN_COOKIESIZE + 1, 1);
+        char *newtoken  = calloc(LOGIN_TOKENSIZE  + 1, 1);
 
         strcpy(newname, user);
 
