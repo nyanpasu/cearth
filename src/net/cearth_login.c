@@ -127,12 +127,31 @@ logindb_cookieget(cearth_logindb *db, const char *user)
         return db->cookie[n];
 }
 
-
 char *
-loginhttp_tokenget(const char *user, const char *cookie)
+loginhttp_tokenget(const char *arg_cookie)
 {
-        printf("TOKENGET IS UNIMPLEMENTED. Args: user: %s, cookie: %s", user, cookie);
-        return("KEK!");
+        char url[LOGIN_URLMAXSIZE] = {0};
+        char cookie[LOGIN_MAXLINE] = {0};
+        FILE *buf = tmpfile();
+
+        strcat(url, haven_webauth);
+        strcat(url, haven_tokenlink);
+
+        strcat(cookie, "hsess=");
+        strcat(cookie, arg_cookie);
+        
+        CURL *c = curl_easy_init();
+        curl_easy_setopt(c, CURLOPT_URL, url);
+        curl_easy_setopt(c, CURLOPT_COOKIE, cookie);
+        curl_easy_setopt(c, CURLOPT_WRITEDATA, buf);
+
+        curl_easy_perform(c);
+
+        curl_easy_cleanup(c);
+
+        /* Parse tmp file */
+
+        fclose(buf);
 }
 
 /* TODO store tokens in logindb as well. */

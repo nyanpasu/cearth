@@ -26,8 +26,11 @@ typedef struct
 
 /* Logs into havenandhearth.com and gets a session cookie */
 void loginhttp_cookieget(cearth_logindb *, const char *user);
-/* gets /autohaven and gets a token in hexadecimal */
-char * loginhttp_tokenget(const char *user, const char *cookie);
+/* gets /autohaven and gets a token in hexadecimal
+ * Requires a hsess cookie to be sent
+ * Needs to parse a full jnlp file.
+ */
+char * loginhttp_tokenget(const char *);
 
 int logindb_useradd(cearth_logindb *, const char *user);
 int logindb_userdel(cearth_logindb *, const char *user);
