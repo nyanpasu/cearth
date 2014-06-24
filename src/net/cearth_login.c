@@ -167,12 +167,11 @@ loginhttp_tokenget(cearth_logindb *db, const char *user)
         strcpy(db->user[n].token, tok);
 }
 
-/* TODO store tokens in logindb as well. */
 char *
-logindb_tokenget(cearth_logindb *db, const char *user, const char *cookie)
+logindb_tokenget(cearth_logindb *db, const char *user)
 {
-        printf("TOKENGET IS UNIMPLEMENTED. Args: user: %s, cookie: %s", user, cookie);
-        return("KEK!");
+        int n = logindb_userget(user);
+        return db->name[n].token;
 }
 
 void
