@@ -33,8 +33,8 @@ logindb_open(void)
                        memcpy(name, line, namelen);
                        memcpy(cookienew, cookie, cookielen);
                        
-                       db->name  [db->n] = name;
-                       db->cookie[db->n] = cookienew;
+                       db->user->name  [db->n] = name;
+                       db->user->cookie [db->n] = cookienew;
                        db->n++;
                }
                fgets(line, LOGINDB_MAXLINE, fp);
