@@ -31,9 +31,9 @@ logindb_open(void)
                        strcpy(m2, cookie);
                        strcpy(m3, token);
 
-                       db->user->name   [db->n] = m1;
-                       db->user->cookie [db->n] = m2;
-                       db->user->token  [db->n] = m3;
+                       db->user[db->n]->name    = m1;
+                       db->user[db->n]->cookie  = m2;
+                       db->user[db->n]->token   = m3;
                        db->n++;
                }
                fgets(line, LOGINDB_MAXLINE, fp);
