@@ -40,6 +40,7 @@ int main(int argc, const char **argv)
         // /* Load resources */
         // cearth_resourcedb *resdb;
         // resdb = resourcedb_open();
+
         /* Login into website and obtain token. */
         cearth_logindb *logdb;
         char *cookie, *token;
