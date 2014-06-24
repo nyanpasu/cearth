@@ -13,9 +13,9 @@
 
 typedef struct
 {
-        char *name[LOGINDB_MAX];
-        char *cookie[LOGINDB_MAX];
-        char *token[LOGINDB_MAX];
+        char *name;
+        char *cookie;
+        char *token;
 } cearth_loginuser;
 
 typedef struct
