@@ -14,10 +14,15 @@
 typedef struct
 {
         int n;
+        cearth_loginuser *user;
+} cearth_logindb;
+
+typedef struct
+{
         char *name[LOGINDB_MAX];
         char *cookie[LOGINDB_MAX];
         char *token[LOGINDB_MAX];
-} cearth_logindb;
+} cearth_loginuser;
 
 /* Logs into havenandhearth.com and gets a session cookie */
 void loginhttp_cookieget(cearth_logindb *, const char *user);
