@@ -40,7 +40,8 @@ int logindb_userdel(cearth_logindb *, const char *user);
  * Checks if a user exists in the logindb
  * Returns 0 if the user does not exists;
  * Returns 1 if the user exists but has no cookie.
- * Returns 2 if the user exists and has a cookie.
+ * Returns 2 if a cookie for the user is found.
+ * Returns 3 if a token for the user is found.
  */
 int logindb_usercheck(cearth_logindb *, const char *user);
 int logindb_userget  (cearth_logindb *, const char *user);

@@ -88,13 +88,14 @@ logindb_usercheck(cearth_logindb *db, const char *user)
         if (db->n == 0)
                 return 0;
 
-        for (int i = 0; i < db->n; ++i)
-        {
-                if (strcmp(db->name[i].name, user) == 0)
-                {
+        for (int i = 0; i < db->n; ++i) {
+                if (strcmp(db->name[i].name, user) == 0) {
                         int success = 1;
                         if (strlen(db->name[i].cookie) > 0)
                                 success = 2;
+                        if (strlen(db->name[i].token) > 0)
+                                success = 3;
+
                         return success;
                 }
         }
