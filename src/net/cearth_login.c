@@ -149,8 +149,17 @@ loginhttp_tokenget(const char *arg_cookie)
         curl_easy_cleanup(c);
 
         /* Parse tmp file */
+        fseek(buf, 0, SEEK_SET);
+        char *tok = calloc(LOGIN_TOKENSIZE + 1, 1);
+        while(!feof(buf)) {
+                /* Finding the token string */
+                fscanf(buf, LOGIN_TOKSTRSTART"%s", tok);
+        }
+
+        printf("TEST: Token from http: %s\n", tok);
 
         fclose(buf);
+        return tok;
 }
 
 /* TODO store tokens in logindb as well. */
