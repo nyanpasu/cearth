@@ -170,8 +170,8 @@ loginhttp_tokenget(cearth_logindb *db, const char *user)
 char *
 logindb_tokenget(cearth_logindb *db, const char *user)
 {
-        int n = logindb_userget(user);
-        return db->name[n].token;
+        int n = logindb_userget(db, user);
+        return db->user[n].token;
 }
 
 void

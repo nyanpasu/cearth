@@ -60,7 +60,7 @@ char * logindb_cookieget(cearth_logindb *, const char *user);
  * Retrieves hexadecimal cookie using logindb_tokenget
  * and returns a pointer to it.
  */
-char * logindb_tokenget(cearth_logindb *, const char *user, const char *cookie);
+char * logindb_tokenget(cearth_logindb *, const char *user);
 
 /*
  * Opens LOGINDB_FILE and loads it into the appropriate struct.

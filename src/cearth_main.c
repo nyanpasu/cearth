@@ -56,13 +56,13 @@ int main(int argc, const char **argv)
                         loginhttp_tokenget(logdb, cookie);
                 case 3:
                         cookie = logindb_cookieget(logdb, arg_user);
-                        token  = logindb_tokenget(logdb, arg_user, cookie);
+                        token  = logindb_tokenget(logdb, arg_user);
                         break;
                 default:
                         break;
         }
         /* TEST */
-        printf("Token: %s", token);
+        printf("Token: %s\n", token);
         logindb_close(logdb);
         //////////////////////  
         //  UNIMPLEMENTED
