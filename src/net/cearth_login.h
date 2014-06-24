@@ -47,6 +47,10 @@ int logindb_userdel(cearth_logindb *, const char *user);
  * Returns 3 if a token for the user is found.
  */
 int logindb_usercheck(cearth_logindb *, const char *user);
+/*
+ * Returns the index of the user found in the db.
+ * Returns -1 if not user is found.
+ */
 int logindb_userget  (cearth_logindb *, const char *user);
 int logindb_cookieset(cearth_logindb *, const char *user, const char *cookie);
 int logindb_cookiedel(cearth_logindb *, const char *user);
