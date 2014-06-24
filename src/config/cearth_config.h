@@ -8,6 +8,7 @@
 #define LOGIN_COOKIESIZE 32
 #define LOGIN_TOKENSIZE  64
 #define LOGIN_URLMAXSIZE 256
+#define LOGIN_TOKSTRSTART "<property name=\"jnlp.haven.authck\" value=\""
 
 static const char *haven_authserv    = "moltke.seatribe.se";
 static const char *haven_webauth     = "www.havenandhearth.com";
