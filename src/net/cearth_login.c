@@ -70,7 +70,7 @@ logindb_useradd(cearth_logindb *db, const char *user)
 {
         char *newname   = calloc(strlen(user)+1, 1);
         char *newcookie = calloc(LOGIN_COOKIESIZE, 1);
-        char *newtoken  = calloc(LOGIN_TOKENSIZE , 1)
+        char *newtoken  = calloc(LOGIN_TOKENSIZE , 1);
 
         strcpy(newname, user);
 
@@ -89,11 +89,11 @@ logindb_usercheck(cearth_logindb *db, const char *user)
                 return 0;
 
         for (int i = 0; i < db->n; ++i) {
-                if (strcmp(db->name[i].name, user) == 0) {
+                if (strcmp(db->user[i].name, user) == 0) {
                         int success = 1;
-                        if (strlen(db->name[i].cookie) > 0)
+                        if (strlen(db->user[i].cookie) > 0)
                                 success = 2;
-                        if (strlen(db->name[i].token) > 0)
+                        if (strlen(db->user[i].token) > 0)
                                 success = 3;
 
                         return success;
@@ -131,11 +131,11 @@ void
 loginhttp_tokenget(cearth_logindb *db, const char *user)
 {
         char url[LOGIN_URLMAXSIZE] = {0};
-        char cookie[LOGIN_MAXLINE] = {0};
+        char cookie[LOGINDB_MAXLINE] = {0};
         FILE *buf = tmpfile();
 
         int n = logindb_userget(db, user);
-        char * user_cookie = db->user[b].cookie;
+        char * user_cookie = db->user[n].cookie;
 
         strcat(url, haven_webauth);
         strcat(url, haven_tokenlink);
@@ -154,7 +154,7 @@ loginhttp_tokenget(cearth_logindb *db, const char *user)
 
         /* Parse tmp file */
         fseek(buf, 0, SEEK_SET);
-        char *tok[LOGIN_TOKENSIZE] = {0};
+        char *tok[LOGINDB_TOKENSIZE] = {0};
         while(!feof(buf)) {
                 /* Finding the token string */
                 fscanf(buf, LOGIN_TOKSTRSTART"%s", tok);
@@ -248,7 +248,7 @@ logindb_cookieset(cearth_logindb *db, const char *user, const char *cookie)
                 return -1;
 
         int n = logindb_userget(db, user);
-        strcpy(db->name[n].cookie, cookie);
+        strcpy(db->user[n].cookie, cookie);
 
         return 0;
 }
