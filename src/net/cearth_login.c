@@ -58,14 +58,13 @@ logindb_close(cearth_logindb *db)
                 fputs(db->user[i].name, fp);
                 fputc(';', fp);
                 fputs(db->user[i].cookie, fp);
-
-				fputs(';', fp);
-				fputs(db->user[i]token, fp);
+                fputs(';', fp);
+                fputs(db->user[i]token, fp);
                 fputc('\n', fp);
 
                 free(db->user[i].name);
                 free(db->user[i].cookie);
-				free(db->user[i].token);
+                free(db->user[i].token);
         }
 
         free(db);
