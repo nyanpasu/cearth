@@ -248,7 +248,7 @@ logindb_cookieset(cearth_logindb *db, const char *user, const char *cookie)
                 return -1;
 
         int n = logindb_userget(db, user);
-        strcpy(db->cookie[n], cookie);
+        strcpy(db->name[n].cookie, cookie);
 
         return 0;
 }
