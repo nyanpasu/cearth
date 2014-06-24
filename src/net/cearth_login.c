@@ -18,23 +18,12 @@ logindb_open(void)
                                fgets(line, LOGINDB_MAXLINE, fp);
                                continue;
                        }
+						char* name = strtok(line, ";");
+						char* cookie = strtok(NULL, ";");
+						char* token = strtok(NULL, ";");
 
-                       char *cookie = strchr(line, ';') + 1;
-                       int namelen = cookie - line - 1;
-                       int cookielen = strlen(cookie); 
-                       if (cookie[cookielen] == '\n') {
-                               cookie[cookielen] = 0;
-                       }
-
-                       /* +1 for the NULL char. */
-                       char *name      = calloc(namelen + 1, sizeof(char));
-                       char *cookienew = calloc(LOGIN_COOKIESIZE, sizeof(char));
-                       /* TODO Use strtok */
-                       memcpy(name, line, namelen);
-                       memcpy(cookienew, cookie, cookielen);
-                       
                        db->user->name  [db->n] = name;
-                       db->user->cookie [db->n] = cookienew;
+                       db->user->cookie [db->n] = cookie;
                        db->n++;
                }
                fgets(line, LOGINDB_MAXLINE, fp);
