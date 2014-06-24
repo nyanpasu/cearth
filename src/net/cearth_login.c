@@ -124,7 +124,7 @@ char *
 logindb_cookieget(cearth_logindb *db, const char *user)
 {
         int n = logindb_userget(db, user);
-        return db->user.cookie[n];
+        return db->user[n].cookie;
 }
 
 void
@@ -154,7 +154,7 @@ loginhttp_tokenget(cearth_logindb *db, const char *user)
 
         /* Parse tmp file */
         fseek(buf, 0, SEEK_SET);
-        char tok[LOGINDB_TOKENSIZE] = {0};
+        char tok[LOGIN_TOKENSIZE] = {0};
         while(!feof(buf)) {
                 /* Finding the token string */
                 fscanf(buf, LOGIN_TOKSTRSTART"%s", tok);
