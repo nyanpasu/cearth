@@ -6,8 +6,9 @@ logindb_open(void)
         cearth_logindb *db = calloc(sizeof(cearth_logindb), 1);
 
         FILE *fp = fopen(LOGINDB_FILE, "r+");
-        if (fp == NULL)
-                return NULL;
+        if (fp == NULL) {
+                return db;
+        }
 
         char line[LOGINDB_MAXLINE];
         fgets(line, LOGINDB_MAXLINE, fp);
