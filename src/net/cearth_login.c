@@ -55,13 +55,13 @@ logindb_close(cearth_logindb *db)
 
         for (int i = 0; i < db->n; ++i)
         {
-                fputs(db->name[i], fp);
+                fputs(db->user[i].name, fp);
                 fputc(';', fp);
-                fputs(db->cookie[i], fp);
+                fputs(db->user[i].cookie, fp);
                 fputc('\n', fp);
 
-                free(db->name[i]);
-                free(db->cookie[i]);
+                free(db->user[i].name  );
+                free(db->user[i].cookie);
         }
 
         free(db);
@@ -112,7 +112,7 @@ logindb_userget(cearth_logindb *db, const char *user)
 
         for (int i = 0; i < db->n; ++i)
         {
-                if (strcmp(db->name[i], user) == 0)
+                if (strcmp(db->user[i].name, user) == 0)
                 {
                         return i;
                 }
@@ -125,7 +125,7 @@ char *
 logindb_cookieget(cearth_logindb *db, const char *user)
 {
         int n = logindb_userget(db, user);
-        return db->cookie[n];
+        return db->user.cookie[n];
 }
 
 char *
