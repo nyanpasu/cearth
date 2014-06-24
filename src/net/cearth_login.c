@@ -3,10 +3,12 @@
 cearth_logindb*
 logindb_open(void)
 {
-        cearth_logindb *db = calloc(sizeof(cearth_logindb), 1);
+        cearth_logindb *db = calloc(1, sizeof(cearth_logindb));
+        printf("TEST sizeof(cearth_logindb): %d\n", sizeof(cearth_logindb));
 
         FILE *fp = fopen(LOGINDB_FILE, "r+");
         if (fp == NULL) {
+                printf("Here in open: db->n is %d\n", db->n);
                 return db;
         }
 
@@ -75,10 +77,10 @@ logindb_useradd(cearth_logindb *db, const char *user)
 
         strcpy(newname, user);
 
+        db->user[db->n].name   = newname;
+        db->user[db->n].cookie = newcookie;
+        db->user[db->n].token  = newtoken;
         db->n++;
-        db->user[db->n-1].name   = newname;
-        db->user[db->n-1].cookie = newcookie;
-        db->user[db->n-1].token  = newtoken;
 
         return 0;
 }
@@ -110,8 +112,9 @@ logindb_userget(cearth_logindb *db, const char *user)
         if (db->n == 0)
                 return -1;
 
-        for (int i = 0; i < db->n; ++i)
+        for (int i = 0; i < db->n; ++i) /* TODO Fix potential for segfault */
         {
+                printf("I'm comparing '%s' against '%s'.\n", db->user[i].name, user);
                 if (strcmp(db->user[i].name, user) == 0)
                 {
                         return i;
@@ -147,7 +150,9 @@ loginhttp_tokenget(cearth_logindb *db, const char *user)
         CURL *c = curl_easy_init();
         curl_easy_setopt(c, CURLOPT_URL, url);
         curl_easy_setopt(c, CURLOPT_COOKIE, cookie);
+        curl_easy_setopt(c, CURLOPT_FOLLOWLOCATION, 1);
         curl_easy_setopt(c, CURLOPT_WRITEDATA, buf);
+        curl_easy_setopt(c, CURLOPT_VERBOSE, 1);
 
         curl_easy_perform(c);
 
@@ -155,10 +160,16 @@ loginhttp_tokenget(cearth_logindb *db, const char *user)
 
         /* Parse tmp file */
         fseek(buf, 0, SEEK_SET);
+        char line[LOGINDB_MAXLINE]; /* TODO Just create a global maxline or smt */
         char tok[LOGIN_TOKENSIZE] = {0};
         while(!feof(buf)) {
                 /* Finding the token string */
-                fscanf(buf, LOGIN_TOKSTRSTART"%s", tok);
+                fgets(line, LOGINDB_MAXLINE, buf);
+                /* XXX Urgent: Do ANYTHING to extract the bloody token.
+                 * Maybe use regex? Fuck shit.
+                 */
+                printf("Line: %s\n", line);
+                sscanf(line, LOGIN_TOKSTRSTART"%s", tok);
         }
 
         printf("TEST: Token from http: %s\n", tok);
@@ -208,23 +219,25 @@ loginhttp_cookieget(cearth_logindb *db, const char *user)
         strcat(postdata, password);
 
         /* Set up HTTP connection */
-        char loginurl[128] = {0};
+        char loginurl[LOGIN_URLMAXSIZE] = {0};
         strcat(loginurl, haven_webauth);
         strcat(loginurl, "/portal/sec/login");
         curl_easy_setopt(handle, CURLOPT_URL, loginurl);
         curl_easy_setopt(handle, CURLOPT_POSTFIELDS, postdata);
         curl_easy_setopt(handle, CURLOPT_COOKIEJAR, LOGIN_COOKIEJAR);
+        curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1);
+        /*curl_easy_setopt(handle, CURLOPT_VERBOSE, 1);*/
 
         curl_easy_perform(handle);
         curl_easy_cleanup(handle);
 
         /* Read cookie if it exists. */
-        FILE *fp = fopen(LOGIN_COOKIEJAR, "w+");
+        FILE *fp = fopen(LOGIN_COOKIEJAR, "r");
         if (!fp) {
                 perror("cearth_login");
                 return;
         }
-        char cookie[33];
+        char cookie[LOGIN_COOKIESIZE + 1] = {0};
         while(!feof(fp)) {
                 char line[LOGINDB_MAXLINE];
                 fgets(line, LOGINDB_MAXLINE, fp);
@@ -232,8 +245,9 @@ loginhttp_cookieget(cearth_logindb *db, const char *user)
         }
 
         fclose(fp);
-        remove(LOGIN_COOKIEJAR);
+        //remove(LOGIN_COOKIEJAR);
 
+        printf("Here1\n");
         logindb_cookieset(db, user, cookie);
 }
 
@@ -248,6 +262,7 @@ logindb_cookieset(cearth_logindb *db, const char *user, const char *cookie)
                 return -1;
 
         int n = logindb_userget(db, user);
+        printf("logindb_userget n =  %d\n", n);
         strcpy(db->user[n].cookie, cookie);
 
         return 0;

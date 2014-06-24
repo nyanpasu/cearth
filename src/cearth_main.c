@@ -42,19 +42,24 @@ int main(int argc, const char **argv)
         // resdb = resourcedb_open();
 
         /* Login into website and obtain token. */
-        cearth_logindb *logdb;
+        cearth_logindb *logdb = logindb_open();
+                printf("Here in main: db->n is %d\n", logdb->n);
+                printf("Here in main: db is %p\n", logdb);
         char *cookie, *token;
-        logdb = logindb_open();
         int check = logindb_usercheck(logdb, arg_user);
         switch(check) {
                 case 0:
+                printf("1\n");
                         logindb_useradd(logdb, arg_user);
                 case 1:
+                printf("2\n");
                         loginhttp_cookieget(logdb, arg_user);
                 case 2:
+                printf("3\n");
                         cookie = logindb_cookieget(logdb, arg_user);
-                        loginhttp_tokenget(logdb, cookie);
+                        loginhttp_tokenget(logdb, arg_user);
                 case 3:
+                printf("4\n");
                         cookie = logindb_cookieget(logdb, arg_user);
                         token  = logindb_tokenget(logdb, arg_user);
                         break;

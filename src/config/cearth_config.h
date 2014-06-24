@@ -8,11 +8,14 @@
 #define LOGIN_COOKIESIZE 32
 #define LOGIN_TOKENSIZE  64
 #define LOGIN_URLMAXSIZE 256
-#define LOGIN_TOKSTRSTART "<property name=\"jnlp.haven.authck\" value=\""
+/* TODO Having the preceeding spaces in LOGIN_TOKSTRSTART  is retarded.
+ * Maybe have the function strip off whitespaces before scanning?
+ */
+#define LOGIN_TOKSTRSTART "     <property name=\"jnlp.haven.authck\" value=\""
 
 static const char *haven_authserv    = "moltke.seatribe.se";
 static const char *haven_webauth     = "www.havenandhearth.com";
-static const char *haven_tokenlink   = "/autohaven";
+static const char *haven_tokenlink   = "/portal/autohaven";
 static const char *cearth_config_dir = "/.cearth/";
 static const char *foo               = "test";
 
