@@ -31,6 +31,8 @@ cearthctx_connect(cearth_ctx *ctx, const char *usr, const char *tok)
         buf_addstring ( &ctx->b_in, usr);
         buf_addbytes  ( &ctx->b_in, tok_b);
 
+	printf ("%d\n", ctx->b_in.data);
+
         ctx_send(ctx);
         return 0;
 }
@@ -54,6 +56,14 @@ buf_init(cearth_buf *b)
         memset(b->data, 0, 65535);
 }
 
+Uint8 read_int8(cearth_buf *b)
+{
+	Uint8 i;
+	memcpy(&i, b->data + b->rpos, 1);
+	b->rpos++;
+	return i;
+}
+
 void
 buf_addint8(cearth_buf *b, Uint8 i)
 {
@@ -61,6 +71,13 @@ buf_addint8(cearth_buf *b, Uint8 i)
         unsigned char *dest = b->data;
         memcpy(dest + pos, &i, 1);
         b->wpos++;
+}
+
+Uint16 read_int16(cearth_buf *b){
+	Uint16 i;
+	memcpy(&i, b->data + b->rpos, 2);
+	b->rpos += 2;
+	return i;
 }
 
 void
@@ -72,6 +89,13 @@ buf_addint16(cearth_buf *b, Uint16 i)
         b->wpos += 2;
 }
 
+Uint32 read_int32(cearth_buf *b){
+	Uint32 i;
+	memcpy(&i, b->data + b->rpos, 4);
+	b->rpos += 4;
+	return i;
+}
+
 void
 buf_addint32(cearth_buf *b, Uint32 i)
 {
@@ -81,6 +105,13 @@ buf_addint32(cearth_buf *b, Uint32 i)
         b->wpos += 4;
 }
 
+char *read_string(cearth_buf *b){
+	char* c;
+	memcpy(c, b->data + b->rpos, strlen((const char *) (b->data + b->rpos)) + 1);
+	b->rpos += strlen((const char *) (b->data + b->rpos)) + 1;
+	return c;
+}
+
 void
 buf_addstring(cearth_buf *b, const char *c)
 {
@@ -88,6 +119,13 @@ buf_addstring(cearth_buf *b, const char *c)
         unsigned char *dest = b->data;
         memcpy(dest + pos, c, strlen(c) + 1);
         b->wpos += strlen(c) + 1;
+}
+
+unsigned char *read_bytes(cearth_buf *b){
+	unsigned char *c;
+	memcpy(c, b->data + b->rpos, strlen((const char *) (b->data + b->rpos)) + 1);
+	 b->rpos += strlen((const char *) (b->data + b->rpos)) + 1;
+	return c;
 }
 
 void

@@ -51,5 +51,11 @@ void buf_addint32(cearth_buf *, Uint32);
 void buf_addstring(cearth_buf *, const char *);
 void buf_addbytes(cearth_buf *, const unsigned char *);
 
+Uint8 read_int8(cearth_buf *b);
+Uint16 read_int16(cearth_buf *b);
+Uint32 read_int32(cearth_buf *b);
+char *read_string(cearth_buf *b);
+unsigned char *read_bytes(cearth_buf *b);
+
 void buf_init(cearth_buf *);
 #endif //#ifndef _H_CTX_
