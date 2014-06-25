@@ -10,7 +10,9 @@ cearthctx_new(void)
         IPaddress ip;
         SDLNet_ResolveHost(&ip, haven_serv, HAVENSERV_PORT);
 
-        SDLNet_UDP_Bind(ctx->sk, -1, &ip);
+        int success = SDLNet_UDP_Bind(ctx->sk, -1, &ip);
+        /* TEST */
+        printf("Success: %d\n", success);
         return ctx;
 }
 
@@ -34,6 +36,19 @@ cearthctx_connect(cearth_ctx *ctx, const char *usr, const char *tok)
 	printf ("%d\n", ctx->b_in.data);
 
         ctx_send(ctx);
+
+        /* TEST */
+        while(1) {
+                /* TODO write ctx_recv */
+                UDPpacket pack;
+                pack.channel = -1;
+                pack.data = ctx->b_out.data;
+                pack.maxlen = 65535;
+                int recv = SDLNet_UDP_Recv(ctx->sk, &pack);
+                if (recv) {
+                        printf("I got something!!!\n");
+                }
+        }
         return 0;
 }
 
