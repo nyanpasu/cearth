@@ -4,17 +4,14 @@ cearth_logindb*
 logindb_open(void)
 {
         cearth_logindb *db = calloc(1, sizeof(cearth_logindb));
-        printf("TEST sizeof(cearth_logindb): %d\n", sizeof(cearth_logindb));
 
         FILE *fp = fopen(LOGINDB_FILE, "r+");
         if (fp == NULL) {
-                printf("Here in open: db->n is %d\n", db->n);
                 return db;
         }
 
         char line[LOGINDB_MAXLINE];
         fgets(line, LOGINDB_MAXLINE, fp);
-
         while (!feof(fp)) {
                if (strlen(line) > 0) { /* If line is not blank */
                        if(line[0] == '#') { /* Ignore lines that start with # as comments. */
@@ -24,24 +21,34 @@ logindb_open(void)
 
                        char* name = strtok(line, " -,.;");
                        char* cookie = strtok(NULL, " -,.;");
+		       if(cookie == NULL){
+			       cookie = "";
+			       name[strlen(name)-1] = '\0';
+			       continue;
+			}
                        char* token = strtok(NULL, " -,.;");
+		       if (token == NULL){
+			       token = "";
+			       cookie[strlen(cookie)-1] = '\0';
+			       continue;
+			}else{
+				token[strlen(token)-1] = '\0';
+			}
+                   	/* Allocate memory for the data */
+                   	char* m1 = malloc(strlen(name  ));
+                   	char* m2 = malloc(strlen(cookie));
+                   	char* m3 = malloc(strlen(token ));
+                   	strcpy(m1, name);
+                   	strcpy(m2, cookie);
+                   	strcpy(m3, token);
 
-                       /* Allocate memory for the data */
-                       char* m1 = malloc(strlen(name  ));
-                       char* m2 = malloc(strlen(cookie));
-                       char* m3 = malloc(strlen(token ));
-                       strcpy(m1, name);
-                       strcpy(m2, cookie);
-                       strcpy(m3, token);
-
-                       db->user[db->n].name    = m1;
-                       db->user[db->n].cookie  = m2;
-                       db->user[db->n].token   = m3;
-                       db->n++;
+                   	db->user[db->n].name    = m1;
+                   	db->user[db->n].cookie  = m2;
+                   	db->user[db->n].token   = m3;
+                    	db->n++;
                }
                fgets(line, LOGINDB_MAXLINE, fp);
         }
-
         fclose(fp);
         return db;
 }
@@ -81,7 +88,6 @@ logindb_useradd(cearth_logindb *db, const char *user)
         db->user[db->n].cookie = newcookie;
         db->user[db->n].token  = newtoken;
         db->n++;
-
         return 0;
 }
 
@@ -114,7 +120,6 @@ logindb_userget(cearth_logindb *db, const char *user)
 
         for (int i = 0; i < db->n; ++i) /* TODO Fix potential for segfault */
         {
-                printf("I'm comparing '%s' against '%s'.\n", db->user[i].name, user);
                 if (strcmp(db->user[i].name, user) == 0)
                 {
                         return i;
@@ -168,11 +173,10 @@ loginhttp_tokenget(cearth_logindb *db, const char *user)
                 /* XXX Urgent: Do ANYTHING to extract the bloody token.
                  * Maybe use regex? Fuck shit.
                  */
-                printf("Line: %s\n", line);
                 sscanf(line, LOGIN_TOKSTRSTART"%s", tok);
+		//tok[strlen(tok-
         }
-
-        printf("TEST: Token from http: %s\n", tok);
+	tok[strlen(tok) - 8] = '\0';
 
         fclose(buf);
         strcpy(db->user[n].token, tok);
@@ -226,8 +230,8 @@ loginhttp_cookieget(cearth_logindb *db, const char *user)
         curl_easy_setopt(handle, CURLOPT_POSTFIELDS, postdata);
         curl_easy_setopt(handle, CURLOPT_COOKIEJAR, LOGIN_COOKIEJAR);
         curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1);
+	curl_easy_setopt(handle, CURLOPT_NOBODY, 1);
         /*curl_easy_setopt(handle, CURLOPT_VERBOSE, 1);*/
-
         curl_easy_perform(handle);
         curl_easy_cleanup(handle);
 
@@ -247,7 +251,6 @@ loginhttp_cookieget(cearth_logindb *db, const char *user)
         fclose(fp);
         //remove(LOGIN_COOKIEJAR);
 
-        printf("Here1\n");
         logindb_cookieset(db, user, cookie);
 }
 
@@ -262,7 +265,6 @@ logindb_cookieset(cearth_logindb *db, const char *user, const char *cookie)
                 return -1;
 
         int n = logindb_userget(db, user);
-        printf("logindb_userget n =  %d\n", n);
         strcpy(db->user[n].cookie, cookie);
 
         return 0;
