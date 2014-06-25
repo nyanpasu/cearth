@@ -21,19 +21,12 @@ logindb_open(void)
 
                        char* name = strtok(line, " -,.;");
                        char* cookie = strtok(NULL, " -,.;");
-		       if(cookie == NULL){
-			       cookie = "";
-			       name[strlen(name)-1] = '\0';
-			       continue;
-			}
                        char* token = strtok(NULL, " -,.;");
-		       if (token == NULL){
+		       if (cookie == NULL)
+			       cookie = "";
+		       if (token == NULL)
 			       token = "";
-			       cookie[strlen(cookie)-1] = '\0';
-			       continue;
-			}else{
-				token[strlen(token)-1] = '\0';
-			}
+
                    	/* Allocate memory for the data */
                    	char* m1 = malloc(strlen(name  ));
                    	char* m2 = malloc(strlen(cookie));
