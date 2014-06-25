@@ -19,9 +19,9 @@ logindb_open(void)
                                continue;
                        }
 
-                       char* name = strtok(line, " -,.;");
-                       char* cookie = strtok(NULL, " -,.;");
-                       char* token = strtok(NULL, " -,.;");
+                       char* name = strtok(line, " -,.;\n");
+                       char* cookie = strtok(NULL, " -,.\n;");
+                       char* token = strtok(NULL, " -,.\n;");
 		       if (cookie == NULL)
 			       cookie = "";
 		       if (token == NULL)
