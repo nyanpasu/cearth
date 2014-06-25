@@ -10,7 +10,7 @@
 #include "utils/cearth_utils.h"
 #include "net/cearth_login.h"
 
-void g_login(cearth_logindb * db, const char *user, char *cookie, char *token);
+void g_login(cearth_logindb * db, const char *user, char **cookie, char **token);
 
 int window_height = 600;
 int window_width = 800;
@@ -46,9 +46,10 @@ int main(int argc, const char **argv)
         /* Login into website and obtain token. */
         char *cookie, *token;
         cearth_logindb *logdb = logindb_open();
-        g_login(logdb, arg_user, cookie, token);
+        g_login(logdb, arg_user, &cookie, &token);
         /* TEST */
         printf("Token: %s\n", token);
+        printf("Token ptr: %p\n", token);
         logindb_close(logdb);
         //////////////////////  
         //  UNIMPLEMENTED
@@ -79,7 +80,7 @@ int main(int argc, const char **argv)
 
 
 void
-g_login(cearth_logindb *db, const char *user, char *cookie, char *token)
+g_login(cearth_logindb *db, const char *user, char **cookie, char **token)
 {
         int check = logindb_usercheck(db, user);
         switch(check) {
@@ -88,11 +89,11 @@ g_login(cearth_logindb *db, const char *user, char *cookie, char *token)
                 case 1:
                         loginhttp_cookieget(db, user);
                 case 2:
-                        cookie = logindb_cookieget(db, user);
+                        *cookie = logindb_cookieget(db, user);
                         loginhttp_tokenget(db, user);
                 case 3:
-                        cookie = logindb_cookieget(db, user);
-                        token  = logindb_tokenget(db, user);
+                        *cookie = logindb_cookieget(db, user);
+                        *token  = logindb_tokenget(db, user);
                         break;
                 default:
                         break;
