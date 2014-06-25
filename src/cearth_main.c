@@ -43,8 +43,6 @@ int main(int argc, const char **argv)
 
         /* Login into website and obtain token. */
         cearth_logindb *logdb = logindb_open();
-                printf("Here in main: db->n is %d\n", logdb->n);
-                printf("Here in main: db is %p\n", logdb);
         char *cookie, *token;
         int check = logindb_usercheck(logdb, arg_user);
         switch(check) {
