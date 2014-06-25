@@ -9,6 +9,7 @@
 #include "config/cearth_config.h"
 #include "utils/cearth_utils.h"
 #include "net/cearth_login.h"
+#include "net/cearth_ctx.h"
 
 void g_login(cearth_logindb * db, const char *user, char **cookie, char **token);
 
@@ -47,17 +48,13 @@ int main(int argc, const char **argv)
         char *cookie, *token;
         cearth_logindb *logdb = logindb_open();
         g_login(logdb, arg_user, &cookie, &token);
-        /* TEST */
-        printf("Token: %s\n", token);
-        printf("Token ptr: %p\n", token);
-        logindb_close(logdb);
+
+        /* Attempt login into game servers */
+        cearth_ctx *ctx = cearthctx_new();
+        cearthctx_connect(ctx, token);
         //////////////////////  
         //  UNIMPLEMENTED
         ////////////////////// 
-        //  /* Attempt login into game servers */
-        //  cearth_ctx *ctx;
-        //  ctx = cearthctx_new();
-        //  cearthctx_connect(ctx, token);
         //  /* Set up screen and gui elements */
         //  cearth_screen *scr cearthscreen_new();
         //  cearth_gui *gui = cearthgui_new();
@@ -73,6 +70,7 @@ int main(int argc, const char **argv)
         //  cearthscreen_stop(scr);
         //  cearthscreen_free(scr);
 
+        logindb_close(logdb);
         utils_lib_deinit();
 
         return 0;
