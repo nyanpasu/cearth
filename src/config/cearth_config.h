@@ -13,6 +13,8 @@
  */
 #define LOGIN_TOKSTRSTART "     <property name=\"jnlp.haven.authck\" value=\""
 
+#define HAVENSERV_PORT 1870
+
 static const char *haven_serv        = "moltke.seatribe.se";
 static const char *haven_webauth     = "www.havenandhearth.com";
 static const char *haven_tokenlink   = "/portal/autohaven";

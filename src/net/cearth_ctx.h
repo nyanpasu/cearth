@@ -3,6 +3,7 @@
 #include <SDL/SDL_net.h>
 
 #include "cearth_network.h"
+#include "../config/cearth_config.h"
 
 typedef struct
 {
@@ -21,6 +22,7 @@ typedef struct
 
 /* Makes a new context and connects to the
  * server defined in cearth_config.h
+ * Remember: A connection is automatically established.
  */
 cearth_ctx *cearthctx_new(void);
 /*
@@ -28,5 +30,5 @@ cearth_ctx *cearthctx_new(void);
  * Returns error value.
  * Returns 0 on success.
  */
-cearthctx_connect(cearth_ctx *ctx, const char *usr, const char *tok);
+int cearthctx_connect(cearth_ctx *ctx, const char *usr, const char *tok);
 #endif //#ifndef _H_CTX_
