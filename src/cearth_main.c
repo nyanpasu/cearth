@@ -44,8 +44,8 @@ int main(int argc, const char **argv)
         // resdb = resourcedb_open();
 
         /* Login into website and obtain token. */
-        cearth_logindb *logdb = logindb_open();
         char *cookie, *token;
+        cearth_logindb *logdb = logindb_open();
         g_login(logdb, arg_user, cookie, token);
         /* TEST */
         printf("Token: %s\n", token);
@@ -81,7 +81,7 @@ int main(int argc, const char **argv)
 void
 g_login(cearth_logindb *db, const char *user, char *cookie, char *token)
 {
-        int check = logindb_usercheck(db, arg_user);
+        int check = logindb_usercheck(db, user);
         switch(check) {
                 case 0:
                         printf("1\n");
@@ -101,3 +101,4 @@ g_login(cearth_logindb *db, const char *user, char *cookie, char *token)
                 default:
                         break;
         }
+}
