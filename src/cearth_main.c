@@ -51,7 +51,7 @@ int main(int argc, const char **argv)
 
         /* Attempt login into game servers */
         cearth_ctx *ctx = cearthctx_new();
-        cearthctx_connect(ctx, token);
+        cearthctx_connect(ctx, arg_user, token);
         //////////////////////  
         //  UNIMPLEMENTED
         ////////////////////// 
