@@ -10,6 +10,8 @@
 #include "utils/cearth_utils.h"
 #include "net/cearth_login.h"
 
+void g_login(const char *user);
+
 int window_height = 600;
 int window_width = 800;
 
@@ -44,26 +46,7 @@ int main(int argc, const char **argv)
         /* Login into website and obtain token. */
         cearth_logindb *logdb = logindb_open();
         char *cookie, *token;
-        int check = logindb_usercheck(logdb, arg_user);
-        switch(check) {
-                case 0:
-                printf("1\n");
-                        logindb_useradd(logdb, arg_user);
-                case 1:
-                printf("2\n");
-                        loginhttp_cookieget(logdb, arg_user);
-                case 2:
-                printf("3\n");
-                        cookie = logindb_cookieget(logdb, arg_user);
-                        loginhttp_tokenget(logdb, arg_user);
-                case 3:
-                printf("4\n");
-                        cookie = logindb_cookieget(logdb, arg_user);
-                        token  = logindb_tokenget(logdb, arg_user);
-                        break;
-                default:
-                        break;
-        }
+        g_login(db, arg_user, cookie, token);
         /* TEST */
         printf("Token: %s\n", token);
         logindb_close(logdb);
@@ -92,4 +75,31 @@ int main(int argc, const char **argv)
         utils_lib_deinit();
 
         return 0;
+}
+
+
+void
+g_login(cearth_logindb *db, const char *user, char *cookie, char *token)
+{
+        int check = logindb_usercheck(db, arg_user);
+        switch(check) {
+                case 0:
+                        printf("1\n");
+                        logindb_useradd(db, user);
+                case 1:
+                        printf("2\n");
+                        loginhttp_cookieget(db, user);
+                case 2:
+                        printf("3\n");
+                        cookie = logindb_cookieget(db, user);
+                        loginhttp_tokenget(db, user);
+                case 3:
+                        printf("4\n");
+                        cookie = logindb_cookieget(db, user);
+                        token  = logindb_tokenget(db, user);
+                        break;
+                default:
+                        break;
+        }
+
 }
