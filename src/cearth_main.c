@@ -10,7 +10,7 @@
 #include "utils/cearth_utils.h"
 #include "net/cearth_login.h"
 
-void g_login(const char *user);
+void g_login(cearth_logindb * db, const char *user, char *cookie, char *token);
 
 int window_height = 600;
 int window_width = 800;
@@ -46,7 +46,7 @@ int main(int argc, const char **argv)
         /* Login into website and obtain token. */
         cearth_logindb *logdb = logindb_open();
         char *cookie, *token;
-        g_login(db, arg_user, cookie, token);
+        g_login(logdb, arg_user, cookie, token);
         /* TEST */
         printf("Token: %s\n", token);
         logindb_close(logdb);
@@ -101,5 +101,3 @@ g_login(cearth_logindb *db, const char *user, char *cookie, char *token)
                 default:
                         break;
         }
-
-}
