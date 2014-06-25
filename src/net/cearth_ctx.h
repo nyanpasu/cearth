@@ -1,6 +1,6 @@
 #ifndef _H_CTX_
 #define _H_CTX_
-#include <SDL/SDL_net.h>
+#include <SDL2/SDL_net.h>
 
 #include "cearth_network.h"
 #include "../config/cearth_config.h"
