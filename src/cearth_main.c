@@ -84,17 +84,13 @@ g_login(cearth_logindb *db, const char *user, char *cookie, char *token)
         int check = logindb_usercheck(db, user);
         switch(check) {
                 case 0:
-                        printf("1\n");
                         logindb_useradd(db, user);
                 case 1:
-                        printf("2\n");
                         loginhttp_cookieget(db, user);
                 case 2:
-                        printf("3\n");
                         cookie = logindb_cookieget(db, user);
                         loginhttp_tokenget(db, user);
                 case 3:
-                        printf("4\n");
                         cookie = logindb_cookieget(db, user);
                         token  = logindb_tokenget(db, user);
                         break;

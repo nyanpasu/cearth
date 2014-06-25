@@ -224,7 +224,7 @@ loginhttp_cookieget(cearth_logindb *db, const char *user)
         curl_easy_setopt(handle, CURLOPT_COOKIEJAR, LOGIN_COOKIEJAR);
         curl_easy_setopt(handle, CURLOPT_FOLLOWLOCATION, 1);
 	curl_easy_setopt(handle, CURLOPT_NOBODY, 1);
-        /*curl_easy_setopt(handle, CURLOPT_VERBOSE, 1);*/
+        curl_easy_setopt(handle, CURLOPT_VERBOSE, 0);
         curl_easy_perform(handle);
         curl_easy_cleanup(handle);
 
