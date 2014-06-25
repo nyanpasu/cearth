@@ -10,7 +10,9 @@ cearthctx_new(void)
         IPaddress ip;
         SDLNet_ResolveHost(&ip, haven_serv, HAVENSERV_PORT);
 
-        SDLNet_UDP_Bind(ctx->sk, -1, &ip);
+        int success = SDLNet_UDP_Bind(ctx->sk, -1, &ip);
+        /* TEST */
+        printf("Success: %d\n", success);
         return ctx;
 }
 
