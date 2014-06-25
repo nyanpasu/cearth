@@ -2,7 +2,7 @@
 #define _NETWORK_H
 #include <SDL2/SDL_net.h>
 
-#define PVER = 2;
+#define PVER         2
 
 #define MSG_SESS     0
 #define MSG_REL      1
