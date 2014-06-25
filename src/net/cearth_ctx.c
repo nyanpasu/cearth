@@ -32,6 +32,19 @@ cearthctx_connect(cearth_ctx *ctx, const char *usr, const char *tok)
         buf_addbytes  ( &ctx->b_in, tok_b);
 
         ctx_send(ctx);
+
+        /* TEST */
+        while(1) {
+                /* TODO write ctx_recv */
+                UDPpacket pack;
+                pack.channel = -1;
+                pack.data = ctx->b_out.data;
+                pack.maxlen = 65535;
+                int recv = SDLNet_UDP_Recv(ctx->sk, &pack);
+                if (recv) {
+                        printf("I got something!!!\n");
+                }
+        }
         return 0;
 }
 
