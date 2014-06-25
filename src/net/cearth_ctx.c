@@ -36,6 +36,17 @@ cearthctx_connect(cearth_ctx *ctx, const char *usr, const char *tok)
 }
 
 void
+ctx_send(cearth_ctx *ctx)
+{
+        UDPpacket pack;
+        pack.channel = -1;
+        pack.data = ctx->b_in.data;
+        pack.len = ctx->b_in.wpos;
+
+        SDLNet_UDP_Send(ctx->sk, pack.channel, &pack);
+}
+
+void
 buf_init(cearth_buf *b)
 {
         b->rpos = 0;
@@ -47,7 +58,7 @@ void
 buf_addint8(cearth_buf *b, Uint8 i)
 {
         int pos = b->wpos;
-        char *dest = b->data;
+        unsigned char *dest = b->data;
         memcpy(dest + pos, &i, 1);
         b->wpos++;
 }
@@ -56,7 +67,7 @@ void
 buf_addint16(cearth_buf *b, Uint16 i)
 {
         int pos = b->wpos;
-        char *dest = b->data;
+        unsigned char *dest = b->data;
         memcpy(dest + pos, &i, 2);
         b->wpos += 2;
 }
@@ -65,7 +76,7 @@ void
 buf_addint32(cearth_buf *b, Uint32 i)
 {
         int pos = b->wpos;
-        char *dest = b->data;
+        unsigned char *dest = b->data;
         memcpy(dest + pos, &i, 4);
         b->wpos += 4;
 }
@@ -74,7 +85,7 @@ void
 buf_addstring(cearth_buf *b, const char *c)
 {
         int pos = b->wpos;
-        char *dest = b->data;
+        unsigned char *dest = b->data;
         memcpy(dest + pos, c, strlen(c) + 1);
         b->wpos += strlen(c) + 1;
 }
@@ -83,8 +94,8 @@ void
 buf_addbytes(cearth_buf *b, const unsigned char *c)
 {
         int pos = b->wpos;
-        char *dest = b->data;
-        memcpy(dest + pos, c, strlen(c) + 1);
-        b->wpos += strlen(c) + 1;
+        unsigned char *dest = b->data;
+        memcpy(dest + pos, c, strlen((const char *)c));
+        b->wpos += strlen((const char *)c);
 }
 

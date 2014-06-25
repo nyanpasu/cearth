@@ -9,7 +9,7 @@ typedef struct
 {
         int rpos;
         int wpos;
-        char data[65535];
+        unsigned char data[65535];
 } cearth_buf;
 
 typedef struct
