@@ -200,7 +200,8 @@ loginhttp_cookieget(cearth_logindb *db, const char *user)
          */
         printf("Password for user '%s': ", user);
         char password[24] = {0};
-        fgets(password, 24, stdin);
+	strncpy(password, getpass(""), 24);
+        //fgets(password, 24, stdin);
         /* Replace trailing newline with NULL */
         size_t nl = strlen(password) - 1;
         if (password[nl] == '\n')
