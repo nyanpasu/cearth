@@ -198,7 +198,7 @@ loginhttp_cookieget(cearth_logindb *db, const char *user)
         char prompt[128] = {0};
         char *password;
         sprintf(prompt, "Password for user '%s': ", user);
-        password = getpass(prompt);
+        password = getpass("Password: ");
         /* Replace trailing newline with NULL */
         size_t nl = strlen(password) - 1;
         if (password[nl] == '\n')
