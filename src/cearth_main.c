@@ -38,8 +38,19 @@ int main(int argc, const char **argv)
         /* Initialize libraries and set working dir to ~/.cearth */
         if (utils_home_init() == 0)
                 exit(EXIT_FAILURE);
-
         utils_lib_init();
+
+        /* Display SDL shit. */
+        g_window = SDL_Create_Window("Cearth",
+                                     SDL_WINDOWPOS_CENTERED,
+                                     SDL_WINDOWPOS_CENTERED,
+                                     window_width,
+                                     window_height,
+                                     0);
+        g_renderer = SDL_Create_Renderer(g_window,
+                                         -1,
+                                         SDL_RENDERER_ACCELERATED);
+
         // /* Load resources */
         // cearth_resourcedb *resdb;
         // resdb = resourcedb_open();
