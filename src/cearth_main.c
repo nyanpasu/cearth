@@ -9,6 +9,7 @@
 #include "config/cearth_config.h"
 #include "utils/cearth_utils.h"
 #include "res/cearth_resource.h"
+#include "gui/cearth_screen.h"
 #include "net/cearth_login.h"
 #include "net/cearth_ctx.h"
 
@@ -57,7 +58,7 @@ int main(int argc, const char **argv)
         resdb = resourcedb_open();
 
         /* Set up screen and gui elements */
-        cearth_screen *scr cearthscreen_new();
+        cearth_screen *scr = cearthscreen_new();
         cearth_gui *gui = cearthgui_new();
 
         cearthgui_bind(gui, ctx);
