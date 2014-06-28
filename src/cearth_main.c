@@ -51,9 +51,26 @@ int main(int argc, const char **argv)
                                          -1,
                                          SDL_RENDERER_ACCELERATED);
 
-        // /* Load resources */
-        // cearth_resourcedb *resdb;
-        // resdb = resourcedb_open();
+        /* Load resources */
+        cearth_resourcedb *resdb;
+        resdb = resourcedb_open();
+
+        /* Set up screen and gui elements */
+        cearth_screen *scr cearthscreen_new();
+        cearth_gui *gui = cearthgui_new();
+
+        cearthgui_bind(gui, ctx);
+
+        cearthscreen_bindsdl(scr, g_renderer);
+        cearthscreen_bindgui(scr, gui);
+        cearthscreen_start(scr);
+        /* Character selection */
+        /* Game loop */
+        /* Disconnect, free memory and shutdown gracefully. */
+        cearthctx_disconnect(ctx);
+        cearthgui_free(gui);
+        cearthscreen_stop(scr);
+        cearthscreen_free(scr);
 
         /* Login into website and obtain token. */
         char *cookie, *token;
@@ -63,23 +80,6 @@ int main(int argc, const char **argv)
         /* Attempt login into game servers */
         cearth_ctx *ctx = cearthctx_new();
         cearthctx_connect(ctx, arg_user, token);
-        //////////////////////  
-        //  UNIMPLEMENTED
-        ////////////////////// 
-        //  /* Set up screen and gui elements */
-        //  cearth_screen *scr cearthscreen_new();
-        //  cearth_gui *gui = cearthgui_new();
-        //  cearthgui_bind(gui, ctx);
-        //  cearthscreen_bindsdl(scr, g_renderer);
-        //  cearthscreen_bindgui(scr, gui);
-        //  cearthscreen_start(scr);
-        //  /* Character selection */
-        //  /* Game loop */
-        //  /* Disconnect, free memory and shutdown gracefully. */
-        //  cearthctx_disconnect(ctx);
-        //  cearthgui_free(gui);
-        //  cearthscreen_stop(scr);
-        //  cearthscreen_free(scr);
 
         logindb_close(logdb);
         utils_lib_deinit();
