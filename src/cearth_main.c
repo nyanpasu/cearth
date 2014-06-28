@@ -8,6 +8,7 @@
 
 #include "config/cearth_config.h"
 #include "utils/cearth_utils.h"
+#include "res/cearth_resource.h"
 #include "net/cearth_login.h"
 #include "net/cearth_ctx.h"
 
@@ -41,13 +42,13 @@ int main(int argc, const char **argv)
         utils_lib_init();
 
         /* Display SDL shit. */
-        g_window = SDL_Create_Window("Cearth",
+        g_window = SDL_CreateWindow("Cearth",
                                      SDL_WINDOWPOS_CENTERED,
                                      SDL_WINDOWPOS_CENTERED,
                                      window_width,
                                      window_height,
                                      0);
-        g_renderer = SDL_Create_Renderer(g_window,
+        g_renderer = SDL_CreateRenderer(g_window,
                                          -1,
                                          SDL_RENDERER_ACCELERATED);
 
