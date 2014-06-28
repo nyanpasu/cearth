@@ -194,14 +194,11 @@ loginhttp_cookieget(cearth_logindb *db, const char *user)
                 default:
                         return;
         }
-        /*
-         * Obtain password from stdin
-         * TODO Make password input hidden like in sudo/github login
-         */
-        printf("Password for user '%s': ", user);
-        char password[24] = {0};
-	strncpy(password, getpass(""), 24);
-        //fgets(password, 24, stdin);
+        /* Obtain password from stdin */
+        char prompt[128] = {0};
+        char *password;
+        sprintf(prompt, "Password for user '%s': ", user);
+        password = getpass(prompt);
         /* Replace trailing newline with NULL */
         size_t nl = strlen(password) - 1;
         if (password[nl] == '\n')
