@@ -66,6 +66,9 @@ int main(int argc, const char **argv)
 
         cearthscreen_bindsdl(scr, g_renderer);
         cearthscreen_bindgui(scr, gui);
+
+        g_login(gui);
+
         cearthscreen_start(scr);
         /* Character selection */
         /* Game loop */
@@ -78,7 +81,7 @@ int main(int argc, const char **argv)
         /* Login into website and obtain token. */
         char *cookie, *token;
         cearth_logindb *logdb = logindb_open();
-        g_login(logdb, arg_user, &cookie, &token);
+        g_login_old(logdb, arg_user, &cookie, &token);
 
         /* Attempt login into game servers */
         cearth_ctx *ctx = cearthctx_new();
@@ -92,7 +95,7 @@ int main(int argc, const char **argv)
 
 
 void
-g_login(cearth_logindb *db, const char *user, char **cookie, char **token)
+g_login_old(cearth_logindb *db, const char *user, char **cookie, char **token)
 {
         int check = logindb_usercheck(db, user);
         switch(check) {
