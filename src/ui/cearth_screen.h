@@ -1,7 +1,7 @@
 #ifndef _CEARTH_SCREEN
 #define _CEARTH_SCREEN
 
-#include <SDL2/SDL2.h>
+#include <SDL2/SDL.h>
 
 #include "cearth_gui.h"
 

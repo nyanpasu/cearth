@@ -9,7 +9,8 @@
 #include "config/cearth_config.h"
 #include "utils/cearth_utils.h"
 #include "res/cearth_resource.h"
-#include "gui/cearth_screen.h"
+#include "ui/cearth_screen.h"
+#include "ui/cearth_gui.h"
 #include "net/cearth_login.h"
 #include "net/cearth_ctx.h"
 
