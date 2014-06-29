@@ -11,6 +11,7 @@
 
 typedef struct
 {
+        int id;
 } cearth_ui;
 
 /**
@@ -23,4 +24,5 @@ typedef struct
         int c;
 } cearth_gui;
 
+cearth_gui *cearthgui_new(void);
 #endif //#ifndef _CEARTH_GUI

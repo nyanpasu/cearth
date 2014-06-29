@@ -14,7 +14,7 @@
 #include "net/cearth_login.h"
 #include "net/cearth_ctx.h"
 
-void g_login     (cearth_logindb * db, const char *user, char **cookie, char **token);
+void g_login     (cearth_logindb * db, const char *user, const char **token);
 void g_getopt    (int, const char **);
 void g_sdlcreate (SDL_Window *, SDL_Renderer *);
 void g_sdldestroy(SDL_Window *, SDL_Renderer *);
@@ -50,6 +50,8 @@ int main(int argc, const char **argv)
         const char *user, *token;
         g_login(gui, user, token);
 
+        cearthscreen_start(scr);
+
         /* Begin server context */
         cearth_ctx *ctx = cearthctx_new();
         cearthctx_guibind(ctx, gui);
@@ -57,8 +59,6 @@ int main(int argc, const char **argv)
         cearthctx_startread(ctx);
         cearthctx_startwrite(ctx);
         cearthctx_startprcs(ctx);
-
-        cearthscreen_start(scr);
 
         /* Character selection */
         cearthgui_clear(gui);
@@ -68,6 +68,7 @@ int main(int argc, const char **argv)
         cearthgui_clear(gui);
         cearthctx_guibind(ctx, gui);
 
+        /* WAIT FOR SCREEN TO QUIT */
         /* Disconnect, free memory and shutdown gracefully. */
         cearthctx_disconnect(ctx);
         cearthscreen_stop(scr);
@@ -132,7 +133,7 @@ g_getopt(int argc, const char **argv)
 }
 
 void
-g_login_old(cearth_logindb *db, const char *user, char **cookie, char **token)
+g_login_old(cearth_logindb *db, const char *user, const char **token)
 {
         int check = logindb_usercheck(db, user);
         switch(check) {
