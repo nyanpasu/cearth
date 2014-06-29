@@ -47,12 +47,13 @@ int main(int argc, const char **argv)
         cearthscreen_bindsdl(scr, g_renderer);
         cearthscreen_bindgui(scr, gui);
 
-        g_login(gui);
+        const char *user, *token;
+        g_login(gui, user, token);
 
         /* Begin server context */
         cearth_ctx *ctx = cearthctx_new();
         cearthctx_guibind(ctx, gui);
-        cearthctx_setconn(ctx, arg_user, token);
+        cearthctx_setconn(ctx, user, token);
         cearthctx_startread(ctx);
         cearthctx_startwrite(ctx);
         cearthctx_startprcs(ctx);

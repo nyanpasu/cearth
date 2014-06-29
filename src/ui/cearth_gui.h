@@ -19,7 +19,8 @@ typedef struct
  */
 typedef struct
 {
-        cearth_ui element[];
+        cearth_ui *i;
+        int c;
 } cearth_gui;
 
 #endif //#ifndef _CEARTH_GUI
