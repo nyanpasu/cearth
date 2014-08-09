@@ -3,6 +3,7 @@
 #include <SDL2/SDL_net.h>
 
 #include "cearth_network.h"
+#include "../ui/cearth_gui.h"
 #include "../config/cearth_config.h"
 
 typedef struct
@@ -24,6 +25,8 @@ typedef struct
         cearth_buf b_in;
         cearth_buf b_out;
 
+        cearth_gui *gui;
+
         int state;
 } cearth_ctx;
 
@@ -32,6 +35,11 @@ typedef struct
  * Remember: A connection is automatically established.
  */
 cearth_ctx *cearthctx_new(void);
+void cearthctx_setconn(cearth_ctx *ctx, const char *user, const char *token);
+void cearthctx_startread(cearth_ctx *ctx);
+void cearthctx_startwrite(cearth_ctx *ctx);
+void cearthctx_startprcs(cearth_ctx *ctx);
+
 /*
  * Attempts to auth with the server and connect.
  * Returns error value.
@@ -39,8 +47,9 @@ cearth_ctx *cearthctx_new(void);
  */
 int cearthctx_connect(cearth_ctx *ctx, const char *usr, const char *tok);
 
+
 /*
- * Internal commands.
+ * INTERNAL COMMANDS.
  */
 void ctx_send();
 void ctx_recv();

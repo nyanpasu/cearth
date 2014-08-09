@@ -14,7 +14,7 @@
 #include "net/cearth_login.h"
 #include "net/cearth_ctx.h"
 
-void g_login     (cearth_logindb * db, const char *user, const char **token);
+void g_login     (cearth_gui *g, cearth_logindb * db, const char *user, const char **token);
 void g_getopt    (int, const char **);
 void g_sdlcreate (SDL_Window *, SDL_Renderer *);
 void g_sdldestroy(SDL_Window *, SDL_Renderer *);
